@@ -14,6 +14,7 @@ class User::ClientCompanysController < ApplicationController
     @client_company.admin = current_user.email
     if @client_company.save
       current_user.roles = 5
+      byebug
       current_user.client_company_id = @client_company.id
       redirect_to user_client_company_path(@client_company)
     else
