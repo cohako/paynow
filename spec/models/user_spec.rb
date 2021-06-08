@@ -1,5 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe 'Validations' do
+  it 'validates presence' do
+    user = User.new
+
+    user.valid?
+
+    expect(user.errors[:email]).to include('não pode ficar em branco')
+    expect(user.roles).to include('client_user')
+  end
 end
