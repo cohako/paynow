@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-
+         
   validates :roles, presence: true
 
-  enum roles: {client_user: 0, client_admin: 5, admin: 777}
-  
+  enum roles: {client_user: 0, client_admin: 5}
+
+  #belongs_to :client_company
 end

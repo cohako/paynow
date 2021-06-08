@@ -1,0 +1,13 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      client_company:
+        one: 'Empresa'
+        other: 'Empresas'
+    attributes:
+      client_company:
+        cnpj: 'CNPJ'
+        name: 'Razão social'
+        billing_address: 'Endereço de cobrança'
+        billing_email: 'Email de cobrança'

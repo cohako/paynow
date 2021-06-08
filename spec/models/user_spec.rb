@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Validations' do
-  it 'validates presence' do
+  it 'cannot be blank' do
     user = User.new
 
     user.valid?

@@ -1,0 +1,15 @@
+<%= form_with url: url, model: client_company do |f| %>
+  <p><%= f.label :cnpj %></p>
+  <p><%= f.text_field :cnpj %>
+  <p><%= client_company.errors.full_messages_for(:cnpj).each { |message| message }%>
+  <p><%= f.label :name %></p>
+  <p><%= f.text_field :name %></p>
+  <p><%= client_company.errors.full_messages_for(:name).each { |message| message }%>
+  <p><%= f.label :billing_address %></p>
+  <p><%= f.text_area :billing_address%></p>
+  <p><%= client_company.errors.full_messages_for(:billing_address).each { |message| message }%>
+  <p><%= f.label :billing_email %></p>
+  <p><%= f.email_field :billing_email%></p>
+  <p><%= client_company.errors.full_messages_for(:billing_email).each { |message| message }%>
+  <p><%= f.submit %></p>
+<% end %>
