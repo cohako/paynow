@@ -1,10 +1,13 @@
-<% if @payment_methods %>
+<% if @payment_methods.empty? %>
+  <h1>Nenhum método de pagamento cadastrado</h1>
+
+<% else %>
   <% @payment_methods.each do |payment_method| %>
     <div>
     <%= link_to payment_method.name, admin_payment_method_path(payment_method) %>
     <%= payment_method.payment_type %>
-    <%= payment_method.payment_fee %>
-    <%= payment_method.max_monetary_fee %>
+    <%= number_to_percentage payment_method.payment_fee %>
+    <%= number_to_currency payment_method.max_monetary_fee %>
     </div>
   <% end  %>
 <% end %>
