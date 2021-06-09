@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   namespace :admin do
     #root to: 'home#index'
-    resources :payment_methods
+    resources :payment_methods do
+      put :active_method, on: :member
+      put :desactive_method, on: :member
+    end
   end
   
   as :admin do

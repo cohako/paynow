@@ -1,10 +1,13 @@
 class Admin::PaymentMethodsController < ApplicationController
+  
+  before_action :set_payment_method, only: %i[show edit update desactive_method archive active_method unarchive]
+  before_action :authenticate_admin!
+
   def index
     @payment_methods = PaymentMethod.all
   end
 
   def show
-    @payment_method = PaymentMethod.find(params[:id])
   end
 
   def new
@@ -20,7 +23,46 @@ class Admin::PaymentMethodsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @payment_method.update(payment_method_params)
+      flash[:notice] = t('.success')
+      render :show
+    else
+      flash[:notice] = t('.fail')
+      render :edit
+    end
+  end
+
+  def desactive_method
+    if archive
+      flash[:notice] = t('.success')
+      render :show
+    end
+  end
+
+  def active_method
+    if unarchive
+      flash[:notice] = t('.success')
+      render :show
+    end
+  end
+
   private
+
+  def unarchive
+    @payment_method.status = 0
+  end
+
+  def archive
+    @payment_method.status = 5
+  end
+
+  def set_payment_method
+    @payment_method = PaymentMethod.find(params[:id])
+  end
 
   def payment_method_params
     params.require(:payment_method).permit(:name, 

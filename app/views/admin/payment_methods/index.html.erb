@@ -1,2 +1,12 @@
+<% if @payment_methods %>
+  <% @payment_methods.each do |payment_method| %>
+    <div>
+    <%= link_to payment_method.name, admin_payment_method_path(payment_method) %>
+    <%= payment_method.payment_type %>
+    <%= payment_method.payment_fee %>
+    <%= payment_method.max_monetary_fee %>
+    </div>
+  <% end  %>
+<% end %>
 
 <p> <%= link_to 'Cadastrar método de pagamento', new_admin_payment_method_path %>

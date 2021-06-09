@@ -2,5 +2,9 @@
 <p> <%= @payment_method.payment_type %></p>
 <p> <%= number_to_percentage @payment_method.payment_fee %></p>
 <p> <%= number_to_currency @payment_method.max_monetary_fee %></p>
+<p> <%= @payment_method.status %> </p>
 
+<p> <%= link_to 'Editar', edit_admin_payment_method_path(@payment_method) %></p>
+<p> <%= link_to 'Desativar método de pagamento', desactive_method_admin_payment_method_path, method: :put %></p>
+<p> <%= link_to 'Ativar método de pagamento', active_method_admin_payment_method_path, method: :put%></p>
 <p> <%= link_to 'Voltar', admin_payment_methods_path %></p>
