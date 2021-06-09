@@ -1,0 +1,22 @@
+<%= form_with url: url, model: payment_method do |f| %>
+  <p> <%= f.label :name %> </p>
+  <p> <%= f.text_field :name %> </p>
+  <%= payment_method.errors.full_messages_for(:name) do |message|%>
+    <p> <%= message %></p>
+  <% end %>
+  <p> <%= f.label :payment_type %> </p>
+  <p> <%= f.select :payment_type, PaymentMethod.payment_types.keys %>
+  <p> <%= f.label :icon %> </p>
+  <p> <%= f.file_field :icon %>
+  <p> <%= f.label :payment_fee %> </p>
+  <p> <%= f.text_field :payment_fee %> </p>
+  <%= payment_method.errors.full_messages_for(:payment_fee) do |message|%>
+    <p> <%= message %></p>
+  <% end %>
+  <p> <%= f.label :max_monetary_fee %> </p>
+  <p> <%= f.text_field :max_monetary_fee %> </p>
+  <%= payment_method.errors.full_messages_for(:max_monetary_fee) do |message|%>
+    <p> <%= message %></p>
+  <% end %>
+  <p> <%= f.submit %> </p>
+<% end %>

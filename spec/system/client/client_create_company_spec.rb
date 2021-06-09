@@ -4,7 +4,7 @@ describe 'Client creates company' do
   it 'successfully' do
     user = User.create!(email: 'teste@teste.com', password: '123456')
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Cadastrar dados da empresa'
     fill_in 'CNPJ', with: '11111111000101'
@@ -26,7 +26,7 @@ describe 'Client creates company' do
   it 'All fields must be filled' do
     user = User.create!(email: 'teste@teste.com', password: '123456')
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Cadastrar dados da empresa'
     click_on 'Cadastrar Empresa'
@@ -41,7 +41,7 @@ describe 'Client creates company' do
                           billing_email: 'email@email.com')
     user = User.create!(email: 'teste@teste.com', password: '123456')
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_user_client_company_path
     fill_in 'CNPJ', with: '11111111111111'
     click_on 'Cadastrar Empresa'

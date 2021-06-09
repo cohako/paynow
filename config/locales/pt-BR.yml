@@ -187,7 +187,7 @@ pt-BR:
           unit: ''
       format:
         delimiter: ''
-        precision: 3
+        precision: 2
         significant: true
         strip_insignificant_zeros: true
       storage_units:
@@ -204,8 +204,9 @@ pt-BR:
           tb: TB
     percentage:
       format:
-        delimiter: "."
+        delimiter: ","
         format: "%n%"
+        precision: 2
     precision:
       format:
         delimiter: "."

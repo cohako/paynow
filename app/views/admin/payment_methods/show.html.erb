@@ -1,0 +1,6 @@
+<p> <%= @payment_method.name %> </p>
+<p> <%= @payment_method.payment_type %></p>
+<p> <%= number_to_percentage @payment_method.payment_fee %></p>
+<p> <%= number_to_currency @payment_method.max_monetary_fee %></p>
+
+<p> <%= link_to 'Voltar', admin_payment_methods_path %></p>

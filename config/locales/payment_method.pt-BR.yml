@@ -1,0 +1,14 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      payment_method:
+        one: 'Método de pagamento'
+        other: 'Métodos de pagamentos'
+    attributes:
+      payment_method:
+        name: 'Nome'
+        icon: 'Ícone'
+        payment_type: 'Tipo de método'
+        payment_fee: 'Taxa'
+        max_monetary_fee: 'Valor máximo de taxa'

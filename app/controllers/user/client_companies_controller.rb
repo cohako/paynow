@@ -1,5 +1,5 @@
-class User::ClientCompanysController < ApplicationController
-  before_action :authenticate_user!
+class User::ClientCompaniesController < ApplicationController
+  before_action :authenticate_user!, scope: :client_user
   before_action :set_client_company, only: %i[show edit update]
 
   def show
