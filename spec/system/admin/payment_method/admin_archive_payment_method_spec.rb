@@ -4,7 +4,7 @@ describe 'Admin archive payment method' do
   it 'successfully' do
     admin = Admin.create!(email: 'teste@teste.com', password: 123456)
     PaymentMethod.create!(name: 'Boleto Vermelho', 
-                          payment_type: :Boleto, 
+                          payment_type: :boleto, 
                           payment_fee: '2,4', 
                           max_monetary_fee: '50,54')
 
@@ -15,7 +15,7 @@ describe 'Admin archive payment method' do
     click_on 'Desativar método de pagamento'
     
     expect(page).to have_content('Desativado com sucesso')
-    expect(page).to have_content('Desativado')
+    expect(page).to have_content('desativado')
   end
   
 end

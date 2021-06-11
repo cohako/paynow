@@ -3,6 +3,6 @@ class PaymentMethod < ApplicationRecord
 
   has_one_attached :icon
 
-  enum payment_type: {Boleto: 0, Cartão: 1, Pix: 2}
-  enum status: {Ativado: 0, Desativado: 5}
+  enum payment_type: {boleto: 0, cartão: 1, pix: 2}
+  enum status: {ativado: 0, desativado: 5}
 end

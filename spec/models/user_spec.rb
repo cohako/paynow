@@ -7,6 +7,6 @@ describe 'Validations' do
     user.valid?
 
     expect(user.errors[:email]).to include('não pode ficar em branco')
-    expect(user.roles).to include('client_user')
+    expect(user.roles).to include('service')
   end
 end

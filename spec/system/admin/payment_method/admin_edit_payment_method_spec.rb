@@ -5,7 +5,7 @@ describe 'Admin edits payment method' do
     
     admin = Admin.create!(email: 'teste@teste.com', password: 123456)
     PaymentMethod.create!(name: 'Boleto Vermelho', 
-                          payment_type: :Boleto, 
+                          payment_type: :boleto, 
                           payment_fee: '2,4', 
                           max_monetary_fee: '50,54')
 
@@ -15,7 +15,7 @@ describe 'Admin edits payment method' do
     click_on 'Boleto Vermelho'
     click_on 'Editar'
     fill_in 'Nome', with: 'Boleto Laranja'
-    select 'Boleto', from: 'Tipo de método'
+    select 'boleto', from: 'Tipo de método'
     fill_in 'Taxa', with: '2.5'
     fill_in 'Valor máximo de taxa', with: '59.99'
     click_on 'Atualizar Método de pagamento'
@@ -30,7 +30,7 @@ describe 'Admin edits payment method' do
   it 'all fields must be filled' do
     admin = Admin.create!(email: 'teste@teste.com', password: 123456)
     PaymentMethod.create!(name: 'Boleto Vermelho', 
-                          payment_type: :Boleto, 
+                          payment_type: :boleto, 
                           payment_fee: '2,4', 
                           max_monetary_fee: '50,54')
 
@@ -40,7 +40,7 @@ describe 'Admin edits payment method' do
     click_on 'Boleto Vermelho'
     click_on 'Editar'
     fill_in 'Nome', with: ''
-    select 'Boleto', from: 'Tipo de método'
+    select 'boleto', from: 'Tipo de método'
     fill_in 'Taxa', with: ''
     fill_in 'Valor máximo de taxa', with: ''
     click_on 'Atualizar Método de pagamento'

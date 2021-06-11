@@ -6,7 +6,7 @@ class User < ApplicationRecord
          
   validates :roles, presence: true
 
-  enum roles: {client_user: 0, client_admin: 5}
+  enum roles: {service: 0, admin: 5}
 
   #belongs_to :client_company
 end

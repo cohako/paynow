@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe 'Client creates company' do
   it 'successfully' do
-    user = User.create!(email: 'teste@teste.com', password: '123456')
+    user = User.create!(email: 'teste@teste.com', password: '123456', roles: :service)
 
     login_as user, scope: :user
-    visit root_path
+    visit user_root_path
     click_on 'Cadastrar dados da empresa'
     fill_in 'CNPJ', with: '11111111000101'
     fill_in 'Razão social', with: 'Empresa de teste'
@@ -27,7 +27,7 @@ describe 'Client creates company' do
     user = User.create!(email: 'teste@teste.com', password: '123456')
 
     login_as user, scope: :user
-    visit root_path
+    visit user_root_path
     click_on 'Cadastrar dados da empresa'
     click_on 'Cadastrar Empresa'
 
@@ -50,8 +50,7 @@ describe 'Client creates company' do
   end
 
   it 'must be loged in' do
-    visit root_path
-    click_on 'Cadastrar dados da empresa'
+    visit user_root_path
 
     expect(current_path).to eq(new_user_session_path)
   end

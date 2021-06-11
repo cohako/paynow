@@ -5,6 +5,10 @@
 <p> <%= @payment_method.status %> </p>
 
 <p> <%= link_to 'Editar', edit_admin_payment_method_path(@payment_method) %></p>
+<% if @payment_method.ativado? %>
 <p> <%= link_to 'Desativar método de pagamento', desactive_method_admin_payment_method_path, method: :put %></p>
-<p> <%= link_to 'Ativar método de pagamento', active_method_admin_payment_method_path, method: :put%></p>
+<% end %>
+<% if @payment_method.desativado? %>
+<p> <%= link_to 'Ativar método de pagamento', active_method_admin_payment_method_path, method: :put%> </p>
+<% end %>
 <p> <%= link_to 'Voltar', admin_payment_methods_path %></p>
