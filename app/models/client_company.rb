@@ -8,5 +8,7 @@ class ClientCompany < ApplicationRecord
   has_secure_token length: 20
 
   validates :cnpj, :token, uniqueness: true
+  
   has_many :users
+  has_many :boleto_accounts
 end

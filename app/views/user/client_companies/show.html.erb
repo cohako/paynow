@@ -8,5 +8,6 @@
   <p> <%= @client_company.token%>
 </div>
 <p><%= link_to 'Editar', edit_user_client_company_path(@client_company) %></p>
+<p><%= link_to 'Cadastrar dados de Boleto', new_user_client_company_boleto_account_path(current_user.client_company_id) %></p>
 <p><%= link_to 'Voltar', root_path %> </p>
 
