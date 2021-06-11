@@ -1,0 +1,12 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      boleto_account:
+        one: 'Método de pagamento'
+        other: 'Métodos de pagamentos'
+    attributes:
+      boleto_account:
+        bank_code: 'Código do banco'
+        agency_code: 'Código da agência'
+        account_number: 'Número da conta'

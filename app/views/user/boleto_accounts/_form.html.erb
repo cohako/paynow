@@ -1,0 +1,13 @@
+<%= form_with url: url, model: [:user, boleto_account] do |f| %>
+  <p><%= f.label :bank_code %></p>
+  <p><%= f.text_field :bank_code %>
+  <p><%#= boleto_account.errors.full_messages_for(:bank_code).each { |message| message }%> </p>
+  <p><%= f.label :agency_code %></p>
+  <p><%= f.text_field :agency_code %></p>
+  <p><%#= boleto_account.errors.full_messages_for(:agency_code).each { |message| message }%> </p>
+  <p><%= f.label :account_number %></p>
+  <p><%= f.text_area :account_number%></p>
+  <p><%#= boleto_account.errors.full_messages_for(:account_number).each { |message| message }%> </p>
+  <p><%= f.collection_select :payment_method_id, @payment_boleto, :id, :name%></p>
+  <p><%= f.submit %></p>
+<% end %>

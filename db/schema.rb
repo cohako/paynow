@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_164320) do
+ActiveRecord::Schema.define(version: 2021_06_10_200934) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 2021_06_09_164320) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "boleto_accounts", force: :cascade do |t|
+    t.integer "bank_code"
+    t.integer "agency_code"
+    t.integer "account_number"
+    t.integer "client_company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "payment_method_id", null: false
+    t.index ["client_company_id"], name: "index_boleto_accounts_on_client_company_id"
+    t.index ["payment_method_id"], name: "index_boleto_accounts_on_payment_method_id"
   end
 
   create_table "client_companies", force: :cascade do |t|
@@ -60,5 +72,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_164320) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "boleto_accounts", "client_companies"
+  add_foreign_key "boleto_accounts", "payment_methods"
   add_foreign_key "users", "client_companies"
 end
