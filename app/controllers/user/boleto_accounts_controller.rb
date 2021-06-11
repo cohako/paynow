@@ -1,9 +1,10 @@
 class User::BoletoAccountsController < User::UserController
-  before_action :set_boleto_method
+  before_action :set_boleto_account, only: %i[show edit update destroy set_boleto_method]
+  before_action :set_boleto_method 
   before_action :set_company
 
+
   def show
-    @boleto_account = BoletoAccount.find(params[:id])
   end
   
   def new
@@ -12,8 +13,10 @@ class User::BoletoAccountsController < User::UserController
 
   def create
     if @boleto_account = @client_company.boleto_accounts.create(boleto_params)
+      flash[:notice] = t('.success')
       redirect_to user_client_company_boleto_account_path(@client_company.id, @boleto_account.id)
     else
+      render :new, notice: t('.fail')
     end
   end
 
@@ -27,9 +30,14 @@ class User::BoletoAccountsController < User::UserController
                                           :client_company_id)
   end
 
+  def set_boleto_account
+    @boleto_account = BoletoAccount.find(params[:id])
+  end
+
   def set_boleto_method
     @payment_boleto = PaymentMethod.where(payment_type: :boleto)
   end
+
   def set_company
     @client_company = ClientCompany.find(params[:client_company_id])
   end

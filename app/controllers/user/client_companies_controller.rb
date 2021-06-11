@@ -18,6 +18,7 @@ class User::ClientCompaniesController < ApplicationController
     if @client_company.save
       current_user.admin!
       current_user.client_company_id = @client_company.id
+      current_user.save
       redirect_to user_client_company_path(@client_company)
     else
       render :new

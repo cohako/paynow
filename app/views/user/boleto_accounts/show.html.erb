@@ -1,0 +1,7 @@
+<p><%= @boleto_account.bank_code %></p>
+<p><%= @boleto_account.agency_code %></p>
+<p><%= @boleto_account.account_number %></p>
+<p><%= @boleto_account.payment_method.name %></p>
+<p><%= @boleto_account.payment_method.payment_type %></p>
+<p><%= number_to_percentage @boleto_account.payment_method.payment_fee %></p>
+<p><%= number_to_currency @boleto_account.payment_method.max_monetary_fee %></p>

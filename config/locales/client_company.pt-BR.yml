@@ -1,5 +1,18 @@
 ---
 pt-BR:
+  user:
+    client_companies:
+      update:
+        success: 'Atualizado com sucesso'
+        fail: 'Não foi possível atualizar'
+      destroy:
+        success: 'Desativado com sucesso'
+        fail: 'Não foi possível apagar'
+      desactive_method:
+        success: 'Desativado com sucesso'
+        fail: 'Não foi possível apagar'
+      active_method:
+        success: 'Ativado com sucesso'
   activerecord:
     models:
       client_company:

@@ -1,5 +1,21 @@
 ---
 pt-BR:
+  user:
+    boleto_accounts:
+      create:
+        success: 'Criado com sucesso'
+        fail: 'Não foi possível criar'
+      update:
+        success: 'Atualizado com sucesso'
+        fail: 'Não foi possível atualizar'
+      destroy:
+        success: 'Desativado com sucesso'
+        fail: 'Não foi possível apagar'
+      desactive_method:
+        success: 'Desativado com sucesso'
+        fail: 'Não foi possível apagar'
+      active_method:
+        success: 'Ativado com sucesso'
   activerecord:
     models:
       boleto_account:
