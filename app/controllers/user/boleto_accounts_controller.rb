@@ -1,7 +1,10 @@
+require 'csv'
 class User::BoletoAccountsController < User::UserController
+  
   before_action :set_boleto_account, only: %i[show edit update destroy set_boleto_method]
   before_action :set_boleto_method 
   before_action :set_company
+  before_action :set_banks, only: %i[new create edit update]
 
 
   def show
@@ -12,7 +15,8 @@ class User::BoletoAccountsController < User::UserController
   end
 
   def create
-    if @boleto_account = @client_company.boleto_accounts.create(boleto_params)
+    @boleto_account = @client_company.boleto_accounts.new(boleto_params)
+    if @boleto_account.save
       flash[:notice] = t('.success')
       redirect_to user_client_company_boleto_account_path(@client_company.id, @boleto_account.id)
     else
@@ -40,5 +44,10 @@ class User::BoletoAccountsController < User::UserController
 
   def set_company
     @client_company = ClientCompany.find(params[:client_company_id])
+  end
+
+  def set_banks
+    bank = File.read(Rails.root.join('lib/assets/csv/bancos.csv'))
+    @banks = CSV.parse(File.read(Rails.root.join('lib/assets/csv/bancos.csv'))).map { |code, name| [code+'<>'+name, code] }
   end
 end

@@ -23,6 +23,7 @@ pt-BR:
         other: 'Métodos de pagamentos'
     attributes:
       boleto_account:
+        payment_method_id: 'Emissor'
         bank_code: 'Código do banco'
         agency_code: 'Código da agência'
         account_number: 'Número da conta'
