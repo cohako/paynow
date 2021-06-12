@@ -50,4 +50,10 @@ describe 'Client edits company' do
 
     expect(page).to have_content('não pode ficar em branco', count: 4)
   end
+  
+  it 'and must be loged in' do
+    visit user_root_path
+
+    expect(current_path).to eq(new_user_session_path)
+  end
 end

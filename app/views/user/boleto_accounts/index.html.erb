@@ -1,1 +1,7 @@
+<%@boleto_accounts.each do |account|%>
+  <% if account.payment_method.ativado?%>
+    <%= link_to account.payment_method.name, user_client_company_boleto_account_path(account.client_company_id, account.id)%>
+    <%= account.account_number %>
+  <%end%>
+<%end%>
 <p><%= link_to 'Cadastrar dados de Boleto', new_user_client_company_boleto_account_path(current_user.client_company_id) %></p>

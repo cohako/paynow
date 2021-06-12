@@ -6,11 +6,6 @@ Rails.application.routes.draw do
       resources :boleto_accounts
     end
   end
-  root to: "home#index"
-
-  devise_for :admins
-  devise_for :users
-
   namespace :admin do
     root to: 'home#index'
     resources :payment_methods do
@@ -18,5 +13,10 @@ Rails.application.routes.draw do
       put :desactive_method, on: :member
     end
   end
+  root to: "home#index"
+
+  devise_for :admins
+  devise_for :users
+
   
 end

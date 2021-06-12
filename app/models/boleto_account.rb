@@ -8,6 +8,4 @@ class BoletoAccount < ApplicationRecord
             :payment_method_id,
             presence: true
 
-  validates :account_number,
-            uniqueness: true
 end

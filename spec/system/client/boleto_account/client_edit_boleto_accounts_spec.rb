@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-describe 'Client registe boleto account' do
+describe 'Clients edits boleto accounts' do
   it 'successfully' do
-
     client_company = ClientCompany.create!(cnpj: '11111111111111', 
                                           name: 'Empresa teste', 
                                           billing_address: 'Endereço teste',
@@ -13,16 +12,22 @@ describe 'Client registe boleto account' do
                                           payment_type: :boleto, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
+    BoletoAccount.create!(bank_code: 418, 
+                          agency_code: 11122, 
+                          account_number: 123654, 
+                          client_company_id: client_company.id,
+                          payment_method_id: payment_method.id)
 
     login_as user, scope: :user
     visit user_root_path
     click_on 'Dados de Pagamento'
-    click_on 'Cadastrar dados de Boleto' #dentro de payment_method#index botão cadastrar boleto
+    click_on 'Boleto Vermelho'
+    click_on 'Editar'
     select '063<>Banco Bradescard S.A.', from: 'Código do banco'
     fill_in 'Código da agência', with: '111'
     fill_in 'Número da conta', with: '112233'
     select 'Boleto Vermelho', from: 'Emissor'
-    click_on 'Cadastrar Método de pagamento'
+    click_on 'Atualizar Método de pagamento'
 
     expect(page).to have_content('63')
     expect(page).to have_content('111')
@@ -39,23 +44,31 @@ describe 'Client registe boleto account' do
                                           billing_address: 'Endereço teste',
                                           billing_email: 'email@email.com', 
                                           admin: 'teste@teste.com')
-     user = User.create!(email: 'teste@teste.com', 
-                        password: '123456', 
-                        client_company_id: client_company.id)
-     payment_method = PaymentMethod.create!(name: 'Boleto Vermelho', 
-                                            payment_type: :boleto, 
-                                            payment_fee: '2.4', 
-                                            max_monetary_fee: '50.54')
+    user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
+    payment_method = PaymentMethod.create!(name: 'Boleto Vermelho', 
+                                          payment_type: :boleto, 
+                                          payment_fee: '2.4', 
+                                          max_monetary_fee: '50.54')
+    BoletoAccount.create!(bank_code: 418, 
+                          agency_code: 11122, 
+                          account_number: 123654, 
+                          client_company_id: client_company.id,
+                          payment_method_id: payment_method.id)
     
     login_as user, scope: :user
     visit user_root_path
     click_on 'Dados de Pagamento'
-    click_on 'Cadastrar dados de Boleto' 
-    click_on 'Cadastrar Método de pagamento'
+    click_on 'Boleto Vermelho'
+    click_on 'Editar'
+    select '', from: 'Código do banco'
+    fill_in 'Código da agência', with: ''
+    fill_in 'Número da conta', with: ''
+    select '', from: 'Emissor'
+    click_on 'Atualizar Método de pagamento'
     
     expect(page).to have_content('não pode ficar em branco', count: 4)
   end
-  
+
   it 'and must be loged in' do
     visit user_root_path
 

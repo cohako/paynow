@@ -2,10 +2,13 @@ require 'csv'
 class User::BoletoAccountsController < User::UserController
   
   before_action :set_boleto_account, only: %i[show edit update destroy set_boleto_method]
-  before_action :set_boleto_method 
-  before_action :set_company
+  before_action :set_boleto_method, onlye: %i[new create edit update]
+  before_action :set_company, only: %i[new create edit update]
   before_action :set_banks, only: %i[new create edit update]
 
+  def index
+    @boleto_accounts = BoletoAccount.all
+  end
 
   def show
   end
@@ -21,6 +24,16 @@ class User::BoletoAccountsController < User::UserController
       redirect_to user_client_company_boleto_account_path(@client_company.id, @boleto_account.id)
     else
       render :new, notice: t('.fail')
+    end
+  end
+
+  def update
+    if @boleto_account.update(boleto_params)
+      flash[:notice] = t('.success')
+      redirect_to user_client_company_boleto_account_path(@boleto_account)
+    else
+      flash[:notice] = t('.fail')
+      render :edit
     end
   end
 

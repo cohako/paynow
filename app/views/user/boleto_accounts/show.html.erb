@@ -5,3 +5,5 @@
 <p><%= @boleto_account.payment_method.payment_type %></p>
 <p><%= number_to_percentage @boleto_account.payment_method.payment_fee %></p>
 <p><%= number_to_currency @boleto_account.payment_method.max_monetary_fee %></p>
+<br>
+<p><%= link_to 'Editar', edit_user_client_company_boleto_account_path(@boleto_account) %></p>
