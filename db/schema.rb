@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_200934) do
+ActiveRecord::Schema.define(version: 2021_06_13_185043) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2021_06_10_200934) do
     t.integer "payment_method_id", null: false
     t.index ["client_company_id"], name: "index_boleto_accounts_on_client_company_id"
     t.index ["payment_method_id"], name: "index_boleto_accounts_on_payment_method_id"
+  end
+
+  create_table "card_accounts", force: :cascade do |t|
+    t.integer "contract_number"
+    t.integer "client_company_id", null: false
+    t.integer "payment_method_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_company_id"], name: "index_card_accounts_on_client_company_id"
+    t.index ["payment_method_id"], name: "index_card_accounts_on_payment_method_id"
   end
 
   create_table "client_companies", force: :cascade do |t|
@@ -74,5 +84,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_200934) do
 
   add_foreign_key "boleto_accounts", "client_companies"
   add_foreign_key "boleto_accounts", "payment_methods"
+  add_foreign_key "card_accounts", "client_companies"
+  add_foreign_key "card_accounts", "payment_methods"
   add_foreign_key "users", "client_companies"
 end

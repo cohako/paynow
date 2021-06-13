@@ -1,0 +1,29 @@
+---
+pt-BR:
+  user:
+    card_accounts:
+      create:
+        success: 'Criado com sucesso'
+        fail: 'Não foi possível criar'
+      update:
+        success: 'Atualizado com sucesso'
+        fail: 'Não foi possível atualizar'
+      destroy:
+        notadmin: 'Somente o usuário administrador pode realizar essa ação'
+        success: 'Apagado com sucesso'
+        fail: 'Não foi possível apagar'
+      desactive_method:
+        success: 'Desativado com sucesso'
+        fail: 'Não foi possível apagar'
+      active_method:
+        success: 'Ativado com sucesso'
+  activerecord:
+    models:
+      card_account:
+        one: 'Método de pagamento'
+        other: 'Métodos de pagamentos'
+    attributes:
+      card_account:
+        payment_method_id: 'Emissor'
+        contract_number: 'Código de contrato'
+        bank_code: 'Código do banco'

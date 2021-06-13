@@ -1,0 +1,13 @@
+<%= form_with url: url, model: [:user, card_account] do |f| %>
+  <p><%= f.label :contract_number %></p>
+  <p><%= f.text_field :contract_number %></p>
+  <% card_account.errors.full_messages_for(:contract_number).each do |message| %> 
+    <p><%=  message %></p> 
+  <% end %> 
+  <p><%= f.label :payment_method_id %></p>
+  <p><%= f.collection_select :payment_method_id, @payment_card, :id, :name, include_blank: true%></p>
+    <% card_account.errors.full_messages_for(:payment_method_id).each do |message| %>
+    <p><%=  message %></p> 
+  <% end %> 
+  <p><%= f.submit %></p>
+<% end %>

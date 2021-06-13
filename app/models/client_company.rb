@@ -11,5 +11,7 @@ class ClientCompany < ApplicationRecord
   
   has_many :users
   has_many :boleto_accounts
+  has_many :card_accounts
   has_many :payment_methods, through: :boleto_accounts
+  has_many :payment_methods, through: :card_accounts
 end

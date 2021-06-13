@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     root to: 'home#index'
     resources :client_companies, only: %i[show new create edit update] do
       resources :boleto_accounts
+      resources :card_accounts
     end
   end
   namespace :admin do

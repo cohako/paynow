@@ -1,0 +1,17 @@
+<% if @card_accounts.empty? %>
+  <h1>Nenhum dado de cartão cadastrado</h1>
+<% else %>
+  <%@card_accounts.each do |account|%>
+    <% if account.payment_method.ativado?%>
+      <div id="card_account">
+        <%= link_to account.payment_method.name, user_client_company_card_account_path(account.client_company_id, account.id)%>
+        <%= account.contract_number %>
+        <%if current_user.admin?%>
+          <p> <%= link_to 'Apagar', user_client_company_card_account_path(account.id, account.client_company_id), method: :delete %></p>
+        <% end %>
+      </div>
+    <%end%>
+  <%end%>
+<% end %>
+
+<p><%= link_to 'Cadastrar dados de Cartão', new_user_client_company_card_account_path(current_user.client_company_id) %></p>

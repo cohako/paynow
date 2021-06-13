@@ -1,0 +1,11 @@
+<p><%= @card_account.contract_number %></p>
+<p><%= @card_account.payment_method.name %></p>
+<p><%= @card_account.payment_method.payment_type %></p>
+<p><%= number_to_percentage @card_account.payment_method.payment_fee %></p>
+<p><%= number_to_currency @card_account.payment_method.max_monetary_fee %></p>
+<br>
+<% if current_user.admin?  %>
+<p> <%= link_to 'Apagar', user_client_company_card_account_path(@card_account), method: :delete %></p>
+<br>
+<%end%>
+<p><%= link_to 'Editar', edit_user_client_company_card_account_path(@card_account) %></p>
