@@ -1,9 +1,9 @@
 require 'csv'
 class User::BoletoAccountsController < User::UserController
-  
-  before_action :set_boleto_account, only: %i[show edit update destroy set_boleto_method]
+  before_action :admin?, only: %i[destroy]
+  before_action :set_boleto_account, only: %i[show edit update destroy admin?]
   before_action :set_boleto_method, onlye: %i[new create edit update]
-  before_action :set_company, only: %i[new create edit update]
+  before_action :set_company, only: %i[new create edit update admin?]
   before_action :set_banks, only: %i[new create edit update]
 
   def index
@@ -36,7 +36,12 @@ class User::BoletoAccountsController < User::UserController
       render :edit
     end
   end
-
+  def destroy
+    if @boleto_account.destroy
+      flash[:notice] = t('.success')
+      redirect_to user_client_company_boleto_accounts_path(@boleto_account.client_company_id)
+    end
+  end
   private
 
   def boleto_params
@@ -45,6 +50,15 @@ class User::BoletoAccountsController < User::UserController
                                           :account_number, 
                                           :payment_method_id, 
                                           :client_company_id)
+  end
+  
+  def admin?
+    @boleto_account = BoletoAccount.find(params[:id])
+    if current_user.admin?
+    else
+      flash[:notice] = t('.notadmin')
+      redirect_to user_client_company_boleto_account_path(@boleto_account, @boleto_account.client_company_id)
+    end
   end
 
   def set_boleto_account
@@ -60,7 +74,7 @@ class User::BoletoAccountsController < User::UserController
   end
 
   def set_banks
-    bank = File.read(Rails.root.join('lib/assets/csv/bancos.csv'))
-    @banks = CSV.parse(File.read(Rails.root.join('lib/assets/csv/bancos.csv'))).map { |code, name| [code+'<>'+name, code] }
+    @banks = CSV.parse(File.read(Rails.root.join('lib/assets/csv/bancos.csv')))
+                  .map { |code, name| [code+'<>'+name, code] }
   end
 end

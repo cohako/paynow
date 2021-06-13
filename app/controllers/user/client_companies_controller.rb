@@ -1,4 +1,4 @@
-class User::ClientCompaniesController < ApplicationController
+class User::ClientCompaniesController < User::UserController
   before_action :authenticate_user!
   before_action :set_client_company, only: %i[show edit update]
 

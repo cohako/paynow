@@ -16,7 +16,7 @@ describe 'Client registe boleto account' do
 
     login_as user, scope: :user
     visit user_root_path
-    click_on 'Dados de Pagamento'
+    click_on 'Dados de Boleto'
     click_on 'Cadastrar dados de Boleto' #dentro de payment_method#index botão cadastrar boleto
     select '063<>Banco Bradescard S.A.', from: 'Código do banco'
     fill_in 'Código da agência', with: '111'
@@ -49,7 +49,7 @@ describe 'Client registe boleto account' do
     
     login_as user, scope: :user
     visit user_root_path
-    click_on 'Dados de Pagamento'
+    click_on 'Dados de Boleto'
     click_on 'Cadastrar dados de Boleto' 
     click_on 'Cadastrar Método de pagamento'
     

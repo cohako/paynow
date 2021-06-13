@@ -20,7 +20,7 @@ describe 'Clients edits boleto accounts' do
 
     login_as user, scope: :user
     visit user_root_path
-    click_on 'Dados de Pagamento'
+    click_on 'Dados de Boleto'
     click_on 'Boleto Vermelho'
     click_on 'Editar'
     select '063<>Banco Bradescard S.A.', from: 'Código do banco'
@@ -57,7 +57,7 @@ describe 'Clients edits boleto accounts' do
     
     login_as user, scope: :user
     visit user_root_path
-    click_on 'Dados de Pagamento'
+    click_on 'Dados de Boleto'
     click_on 'Boleto Vermelho'
     click_on 'Editar'
     select '', from: 'Código do banco'

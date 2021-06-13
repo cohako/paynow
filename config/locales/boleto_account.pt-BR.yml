@@ -9,7 +9,8 @@ pt-BR:
         success: 'Atualizado com sucesso'
         fail: 'Não foi possível atualizar'
       destroy:
-        success: 'Desativado com sucesso'
+        notadmin: 'Somente o usuário administrador pode realizar essa ação'
+        success: 'Apagado com sucesso'
         fail: 'Não foi possível apagar'
       desactive_method:
         success: 'Desativado com sucesso'

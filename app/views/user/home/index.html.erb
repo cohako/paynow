@@ -1,6 +1,6 @@
 <% if current_user.client_company_id%>
 <p><%= link_to 'Dados da empresa', user_client_company_path(current_user.client_company_id) %></p>
-<p><%= link_to 'Dados de Pagamento', user_client_company_boleto_accounts_path(current_user.client_company_id) %></p>
+<p><%= link_to 'Dados de Boleto', user_client_company_boleto_accounts_path(current_user.client_company_id) %></p>
 <% else %>
 <%= link_to 'Cadastrar dados da empresa', new_user_client_company_path(@client_company) %>
 <% end %>

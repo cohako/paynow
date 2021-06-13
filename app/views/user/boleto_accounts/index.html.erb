@@ -1,7 +1,17 @@
-<%@boleto_accounts.each do |account|%>
-  <% if account.payment_method.ativado?%>
-    <%= link_to account.payment_method.name, user_client_company_boleto_account_path(account.client_company_id, account.id)%>
-    <%= account.account_number %>
+<% if @boleto_accounts.empty? %>
+  <h1>Nenhum dado de boleto cadastrado</h1>
+<% else %>
+  <%@boleto_accounts.each do |account|%>
+    <% if account.payment_method.ativado?%>
+      <div id="boleto_account">
+        <%= link_to account.payment_method.name, user_client_company_boleto_account_path(account.client_company_id, account.id)%>
+        <%= account.account_number %>
+        <%if current_user.admin?%>
+          <p> <%= link_to 'Apagar', user_client_company_boleto_account_path(account.id, account.client_company_id), method: :delete %></p>
+        <% end %>
+      </div>
+    <%end%>
   <%end%>
-<%end%>
+<% end %>
+
 <p><%= link_to 'Cadastrar dados de Boleto', new_user_client_company_boleto_account_path(current_user.client_company_id) %></p>
