@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       resources :card_accounts
       resources :pix_accounts
       resources :client_product, param: :product_token
+      resources :payment_methods, only: %i[index show]
+
+      put :regenerate_token, on: :member
+
     end
   end
   namespace :admin do

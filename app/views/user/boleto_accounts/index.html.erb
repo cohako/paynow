@@ -3,7 +3,7 @@
 <% else %>
   <%@boleto_accounts.each do |account|%>
     <% if account.payment_method.ativado?%>
-      <div id="boleto_account">
+      <div id="boleto_account" class="card border-dark mb-3" style="max-width: 10rem;">
         <%= link_to account.payment_method.name, user_client_company_boleto_account_path(account.client_company_id, account.id)%>
         <%= account.account_number %>
         <%if current_user.admin?%>

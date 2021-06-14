@@ -6,7 +6,7 @@ class User::ClientProduct < ApplicationController
   # end
 
   def create
-    @client_product = @client_company.clientProduct.new(clientcompany_params)
+    @client_product = @client_company.clientProduct.new(product_params)
     if @client_product.save
       redirect_to user_client_company_client_product_path(@client_produt)
     else

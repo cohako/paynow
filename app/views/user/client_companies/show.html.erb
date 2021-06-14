@@ -5,9 +5,10 @@
   <p> <%= @client_company.billing_address %> </p>
   <p> <%= @client_company.billing_email %> </p>
   <p> <%= @client_company.admin %> </p>
-  <p> <%= @client_company.token%>
   <p> <%= @client_company.domain %> </p>
+  <p> <%= @client_company.token%></p>
 </div>
+<p><%= link_to 'Trocar token', regenerate_token_user_client_company_path, method: :put, class:"btn btn-dark" %></p>
 <p><%= link_to 'Editar', edit_user_client_company_path(@client_company) %></p>
 <p><%= link_to 'Voltar', root_path %> </p>
 

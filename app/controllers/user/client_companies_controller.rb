@@ -1,7 +1,7 @@
 class User::ClientCompaniesController < User::UserController
   before_action :authenticate_user!
-  before_action :set_client_company, only: %i[show edit update]
-  before_action :admin?, only: %i[edit update]
+  before_action :set_client_company, only: %i[show edit update regenerate_token]
+  before_action :admin?, only: %i[edit update regenerate_token]
   #before_action :company_created?, exclude: %i[new create]
 
   def index
@@ -42,6 +42,12 @@ class User::ClientCompaniesController < User::UserController
     end
   end
 
+  def regenerate_token
+    @client_company.regenerate_token
+    @client_company.save
+    redirect_to user_client_company_path(@client_company)
+  end
+
   private
 
   def clientcompany_params
@@ -54,11 +60,11 @@ class User::ClientCompaniesController < User::UserController
   end
 
   def set_client_company
-    @client_company = ClientCompany.find(params[:token])
+    @client_company = ClientCompany.find_by(params[token: :token])
   end
 
   def admin?
-    @client_company = ClientCompany.find(params[:token])
+    @client_company = ClientCompany.find_by(params[token: :token])
     if current_user.admin?
     else
       flash[:notice] = t('.notadmin')

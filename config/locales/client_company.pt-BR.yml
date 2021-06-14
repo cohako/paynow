@@ -14,6 +14,8 @@ pt-BR:
         fail: 'Não foi possível apagar'
       active_method:
         success: 'Ativado com sucesso'
+      regenerate_token:
+        notadmin: 'Somente o usuário administrador pode realizar essa ação'
   activerecord:
     models:
       client_company:
