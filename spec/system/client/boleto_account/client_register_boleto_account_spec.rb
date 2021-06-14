@@ -1,13 +1,14 @@
 require 'rails_helper'
 
-describe 'Client registe boleto account' do
+describe 'Client register boleto account' do
   it 'successfully' do
 
     client_company = ClientCompany.create!(cnpj: '11111111111111', 
-                                          name: 'Empresa teste', 
-                                          billing_address: 'Endereço teste',
-                                          billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com')
+                          name: 'Empresa teste', 
+                          billing_address: 'Endereço teste',
+                          billing_email: 'email@email.com', 
+                          admin: 'teste@teste.com',
+                          domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Boleto Vermelho', 
                                           payment_type: :boleto, 
@@ -35,10 +36,11 @@ describe 'Client registe boleto account' do
 
   it 'and cannot be blank' do
     client_company = ClientCompany.create!(cnpj: '11111111111111', 
-                                          name: 'Empresa teste', 
-                                          billing_address: 'Endereço teste',
-                                          billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com')
+                          name: 'Empresa teste', 
+                          billing_address: 'Endereço teste',
+                          billing_email: 'email@email.com', 
+                          admin: 'teste@teste.com',
+                          domain: 'teste.com')
      user = User.create!(email: 'teste@teste.com', 
                         password: '123456', 
                         client_company_id: client_company.id)

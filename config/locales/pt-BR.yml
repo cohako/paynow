@@ -131,7 +131,7 @@ pt-BR:
       required: é obrigatório(a)
       taken: já está em uso
       too_long:
-        one: 'é muito longo (máximo: 1 caracter)'
+        one: 'é muito longo (máximo: 20 caracter)'
         other: 'é muito longo (máximo: %{count} caracteres)'
       too_short:
         one: 'é muito curto (mínimo: 1 caracter)'

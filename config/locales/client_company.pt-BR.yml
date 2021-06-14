@@ -3,6 +3,7 @@ pt-BR:
   user:
     client_companies:
       update:
+        notadmin: 'Somente o usuário administrador pode realizar essa ação'
         success: 'Atualizado com sucesso'
         fail: 'Não foi possível atualizar'
       destroy:

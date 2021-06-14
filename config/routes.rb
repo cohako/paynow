@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   
+  
   namespace :user do
     root to: 'home#index'
-    resources :client_companies, only: %i[show new create edit update] do
+    resources :client_companies, only: %i[show new create edit update], param: :token do
       resources :boleto_accounts
       resources :card_accounts
+      resources :pix_accounts
+      resources :client_product, param: :product_token
     end
   end
   namespace :admin do
@@ -19,5 +22,8 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :users
 
-  
+  namespace :api do
+    namespace :v1 do
+    end
+  end
 end

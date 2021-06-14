@@ -17,7 +17,8 @@ describe 'Validations' do
                         name: 'empresa', 
                         billing_address: 'endereço', 
                         billing_email: 'email@email.com', 
-                        token: '123abc')
+                        token: '123abc',
+                        domain: 'teste.com')
     client_company = ClientCompany.new(cnpj: '123412341234', 
                                       token: '123abc')
 

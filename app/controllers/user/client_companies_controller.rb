@@ -1,6 +1,8 @@
 class User::ClientCompaniesController < User::UserController
   before_action :authenticate_user!
   before_action :set_client_company, only: %i[show edit update]
+  before_action :admin?, only: %i[edit update]
+  #before_action :company_created?, exclude: %i[new create]
 
   def index
     @client_companies = ClientCompany.all
@@ -14,7 +16,9 @@ class User::ClientCompaniesController < User::UserController
 
   def create
     @client_company = ClientCompany.new(clientcompany_params)
-    @client_company.admin = current_user.email
+    domain = current_user.email.split('@')
+    @client_company.domain = domain[1]
+    @client_company.admin = current_user.id
     if @client_company.save
       current_user.admin!
       current_user.client_company_id = @client_company.id
@@ -45,14 +49,20 @@ class User::ClientCompaniesController < User::UserController
                   :name, 
                   :billing_address, 
                   :billing_email,
-                  :admin)
+                  :admin,
+                  :domain)
   end
 
   def set_client_company
-    @client_company = ClientCompany.find(params[:id])
+    @client_company = ClientCompany.find(params[:token])
   end
 
   def admin?
-    current_user.admin?
+    @client_company = ClientCompany.find(params[:token])
+    if current_user.admin?
+    else
+      flash[:notice] = t('.notadmin')
+      redirect_to user_client_company_path(@client_company)
+    end
   end
 end

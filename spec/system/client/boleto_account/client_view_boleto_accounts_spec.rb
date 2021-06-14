@@ -1,18 +1,20 @@
 require 'rails_helper'
 
-describe 'Client registe boleto account' do
+describe 'Client view boleto account' do
   it 'successfully' do
 
     client_company = ClientCompany.create!(cnpj: '11111111111111', 
-                                          name: 'Empresa teste', 
-                                          billing_address: 'Endereço teste',
-                                          billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com')
+                          name: 'Empresa teste', 
+                          billing_address: 'Endereço teste',
+                          billing_email: 'email@email.com', 
+                          admin: 'teste@teste.com',
+                          domain: 'teste.com')
     client_company2 = ClientCompany.create!(cnpj: '11111111111112', 
-                                          name: 'Empresa teste', 
-                                          billing_address: 'Endereço teste',
-                                          billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com')
+                          name: 'Empresa teste', 
+                          billing_address: 'Endereço teste',
+                          billing_email: 'email@email.com', 
+                          admin: 'teste@teste.com',
+                          domain: 'teste2.com')
 
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
 
@@ -56,10 +58,11 @@ describe 'Client registe boleto account' do
 
   it 'and there is none' do
     client_company = ClientCompany.create!(cnpj: '11111111111111', 
-                                          name: 'Empresa teste', 
-                                          billing_address: 'Endereço teste',
-                                          billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com')
+                          name: 'Empresa teste', 
+                          billing_address: 'Endereço teste',
+                          billing_email: 'email@email.com', 
+                          admin: 'teste@teste.com',
+                          domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', roles: :admin,client_company_id: client_company.id)
     login_as user, scope: :user
     visit user_root_path
@@ -71,10 +74,11 @@ describe 'Client registe boleto account' do
   
   it 'and must be loged in' do
     client_company = ClientCompany.create!(cnpj: '11111111111111', 
-                                          name: 'Empresa teste', 
-                                          billing_address: 'Endereço teste',
-                                          billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com')
+                          name: 'Empresa teste', 
+                          billing_address: 'Endereço teste',
+                          billing_email: 'email@email.com', 
+                          admin: 'teste@teste.com',
+                          domain: 'teste.com')
     visit user_client_company_boleto_accounts_path(client_company)
 
     expect(current_path).to eq(new_user_session_path)

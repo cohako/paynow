@@ -1,5 +1,7 @@
 require 'csv'
 class User::BoletoAccountsController < User::UserController
+
+  before_action :authenticate_user!
   before_action :admin?, only: %i[destroy]
   before_action :set_boleto_account, only: %i[show edit update destroy admin?]
   before_action :set_boleto_method, onlye: %i[new create edit update]
@@ -7,7 +9,7 @@ class User::BoletoAccountsController < User::UserController
   before_action :set_banks, only: %i[new create edit update]
 
   def index
-    @boleto_accounts = BoletoAccount.all
+    @boleto_accounts = BoletoAccount.where(client_company_id: current_user.client_company_id)
   end
 
   def show
@@ -70,11 +72,12 @@ class User::BoletoAccountsController < User::UserController
   end
 
   def set_company
-    @client_company = ClientCompany.find(params[:client_company_id])
+    @client_company = ClientCompany.find(params[:client_company_token])
   end
 
   def set_banks
     @banks = CSV.parse(File.read(Rails.root.join('lib/assets/csv/bancos.csv')))
                   .map { |code, name| [code+'<>'+name, code] }
   end
+
 end

@@ -1,5 +1,6 @@
 require 'csv'
 class User::CardAccountsController < User::UserController
+  before_action :authenticate_user!
   before_action :admin?, only: %i[destroy]
   before_action :set_card_account, only: %i[show edit update destroy admin?]
   before_action :set_card_method, onlye: %i[new create edit update]
@@ -7,7 +8,7 @@ class User::CardAccountsController < User::UserController
   before_action :set_banks, only: %i[new create edit update]
 
   def index
-    @card_accounts = CardAccount.all
+    @card_accounts = CardAccount.where(client_company_id: current_user.client_company_id)
   end
 
   def show
@@ -36,12 +37,14 @@ class User::CardAccountsController < User::UserController
       render :edit
     end
   end
+
   def destroy
     if @card_account.destroy
       flash[:notice] = t('.success')
       redirect_to user_client_company_card_accounts_path(@card_account.client_company_id)
     end
   end
+  
   private
 
   def card_params
@@ -68,7 +71,7 @@ class User::CardAccountsController < User::UserController
   end
 
   def set_company
-    @client_company = ClientCompany.find(params[:client_company_id])
+    @client_company = ClientCompany.find(params[:client_company_token])
   end
 
   def set_banks

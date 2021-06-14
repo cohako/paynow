@@ -13,7 +13,7 @@
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">Paynow</a>
+      <%=link_to 'Paynow', admin_root_path,  class: "navbar-brand"%>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -23,7 +23,7 @@
             <a class="nav-link"> <%= link_to 'Métodos de pagamento', admin_payment_methods_path %></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <%= link_to 'Log out', destroy_admin_session_path, method: :delete, class:"nav-link" %>
           </li>
         </ul>
       </div>
