@@ -1,5 +1,5 @@
 class User::ClientProductsController < User::UserController
-  before_action :set_product, only: %i[show edit update]
+  before_action :set_product, only: %i[show edit update destroy]
   before_action :set_company, only: %i[new create]
 
   def index
@@ -34,6 +34,13 @@ class User::ClientProductsController < User::UserController
     else
       flash[:notice] = t('.fail')
       render :edit
+    end
+  end
+
+  def destroy
+    if @client_product.destroy
+      flash[:notice] = t('.success')
+      redirect_to user_client_company_client_products_path(@client_product.client_company_id)
     end
   end
 

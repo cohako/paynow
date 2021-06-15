@@ -5,5 +5,6 @@
 <p><%= number_to_percentage @client_product.boleto_discount %></p>
 <p><%= @client_product.product_token %></p>
 
+<p> <%= link_to 'Apagar', user_client_company_client_product_path(@client_product), method: :delete %></p>
 <p><%= link_to 'Editar', edit_user_client_company_client_product_path(@client_product.client_company, @client_product.product_token) %></p>
 <p><%= link_to 'Voltar', user_client_company_client_products_path(@client_product.client_company.token) %></p>
