@@ -1,13 +1,28 @@
 <%= form_with url: url, model: [:user, client_product] do |f|%>
   <p><%= f.label :name %></p>
   <p><%= f.text_field :name %></p>
+  <% client_product.errors.full_messages_for(:name).each do |message|%>
+    <p><%= message %></p>
+  <% end %>
   <p><%= f.label :price %></p>
   <p><%= f.number_field :price, min: 0, step: 0.01 %></p>
+    <% client_product.errors.full_messages_for(:price).each do |message|%>
+    <p><%= message %></p>
+  <% end %>
   <p><%= f.label :pix_discount %></p> 
   <p><%= f.number_field :pix_discount, step: 0.01 %></p> 
+    <% client_product.errors.full_messages_for(:pix_discount).each do |message|%>
+    <p><%= message %></p>
+  <% end %>
   <p><%= f.label :card_discount %></p> 
   <p><%= f.number_field :card_discount, min: 0, step: 0.01 %></p> 
+    <% client_product.errors.full_messages_for(:card_discount).each do |message|%>
+    <p><%= message %></p>
+  <% end %>
   <p><%= f.label :boleto_discount %></p> 
   <p><%= f.number_field :boleto_discount, min: 0, step: 0.01 %></p> 
+    <% client_product.errors.full_messages_for(:boleto_discount).each do |message|%>
+    <p><%= message %></p>
+  <% end %>
   <p><%= f.submit %></p>
 <% end %>

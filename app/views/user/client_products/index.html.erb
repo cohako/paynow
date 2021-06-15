@@ -1,1 +1,8 @@
+<% if @client_products%>
+  <% @client_products.each do |product| %>
+    <%= link_to product.name, user_client_company_client_product_path(product.client_company, product.product_token) %>
+  <% end %>
+<% else %>
+<% end %>
+
 <p><%= link_to 'Cadastrar produto', new_user_client_company_client_product_path(current_user.client_company_id) %></p>

@@ -1,5 +1,5 @@
 class User::ClientProductsController < User::UserController
-  before_action :set_product, only: %i[show]
+  before_action :set_product, only: %i[show edit update]
   before_action :set_company, only: %i[new create]
 
   def index
@@ -18,6 +18,22 @@ class User::ClientProductsController < User::UserController
     if @client_product.save
       flash[:notice] = t('.success')
       redirect_to user_client_company_client_product_path(@client_product.client_company.token, @client_product)
+    else
+      flash[:notice] = t('.fail')
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @client_product.update(product_params)
+      flash[:notice] = t('.success')
+      redirect_to user_client_company_client_product_path(@client_product.client_company.token, @client_product)
+    else
+      flash[:notice] = t('.fail')
+      render :edit
     end
   end
 

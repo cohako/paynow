@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client register product' do
+describe 'Client edit product' do
   it 'successfully' do
     client_company = ClientCompany.create!(cnpj: '11111111111111', 
       name: 'Empresa teste', 
@@ -12,17 +12,24 @@ describe 'Client register product' do
                         password: '123456', 
                         roles: :admin, 
                         client_company_id: client_company.id)
+    ClientProduct.create!(name: 'Curso de Café', 
+                          price: '20.00', 
+                          pix_discount: 5, 
+                          card_discount: 5, 
+                          boleto_discount: 2,
+                          client_company_id: client_company.id)
     
     login_as user, scope: :user
     visit user_root_path
     click_on 'Produtos'
-    click_on 'Cadastrar produto'
+    click_on 'Curso de Café'
+    click_on 'Editar'
     fill_in 'Nome', with: 'Curso de Chá'
     fill_in 'Preço', with: '10.00'
     fill_in 'Desconto do Pix', with: '10.20'
     fill_in 'Desconto do Cartão', with: '2'
     fill_in 'Desconto do Boleto', with: '4'
-    click_on 'Cadastrar Produto'
+    click_on 'Atualizar Produto'
 
     expect(page).to have_content('Curso de Chá')
     expect(page).to have_content('R$ 10,00')
@@ -43,12 +50,24 @@ describe 'Client register product' do
                         password: '123456', 
                         roles: :admin, 
                         client_company_id: client_company.id)
+    ClientProduct.create!(name: 'Curso de Café', 
+                          price: '20.00', 
+                          pix_discount: 5, 
+                          card_discount: 5, 
+                          boleto_discount: 2,
+                          client_company_id: client_company.id)
     
     login_as user, scope: :user
     visit user_root_path
     click_on 'Produtos'
-    click_on 'Cadastrar produto'
-    click_on 'Cadastrar Produto'
+    click_on 'Curso de Café'
+    click_on 'Editar'
+    fill_in 'Nome', with: ''
+    fill_in 'Preço', with: ''
+    fill_in 'Desconto do Pix', with: ''
+    fill_in 'Desconto do Cartão', with: ''
+    fill_in 'Desconto do Boleto', with: ''
+    click_on 'Atualizar Produto'
 
     expect(page).to have_content('não pode ficar em branco', count: 5)
 
