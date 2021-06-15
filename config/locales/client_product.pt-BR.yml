@@ -1,0 +1,31 @@
+---
+pt-BR:
+  user:
+    client_products:
+      create:
+        success: 'Criado com sucesso'
+        fail: 'Não foi possível criar'
+      update:
+        success: 'Atualizado com sucesso'
+        fail: 'Não foi possível atualizar'
+      destroy:
+        notadmin: 'Somente o usuário administrador pode realizar essa ação'
+        success: 'Apagado com sucesso'
+        fail: 'Não foi possível apagar'
+      desactive_method:
+        success: 'Desativado com sucesso'
+        fail: 'Não foi possível apagar'
+      active_method:
+        success: 'Ativado com sucesso'
+  activerecord:
+    models:
+      client_product:
+        one: 'Produto'
+        other: 'Produto'
+    attributes:
+      client_product:
+        name: 'Nome'
+        price: 'Preço'
+        pix_discount: 'Desconto do Pix'
+        card_discount: 'Desconto do Cartão'
+        boleto_discount: 'Desconto do Boleto'

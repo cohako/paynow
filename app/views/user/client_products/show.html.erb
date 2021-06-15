@@ -1,0 +1,8 @@
+<p><%= @client_product.name %></p>
+<p><%= number_to_currency @client_product.price %></p>
+<p><%= number_to_percentage @client_product.pix_discount %></p>
+<p><%= number_to_percentage @client_product.card_discount %></p>
+<p><%= number_to_percentage @client_product.boleto_discount %></p>
+<p><%= @client_product.product_token %></p>
+
+<p><%= link_to 'Voltar', user_client_company_client_products_path(@client_product.client_company.token) %></p>

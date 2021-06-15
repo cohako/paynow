@@ -71,7 +71,7 @@ class User::CardAccountsController < User::UserController
   end
 
   def set_company
-    @client_company = ClientCompany.find(params[:client_company_token])
+    @client_company = ClientCompany.find_by(params[token: :client_company_token])
   end
 
   def set_banks

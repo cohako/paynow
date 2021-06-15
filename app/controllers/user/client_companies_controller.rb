@@ -7,6 +7,7 @@ class User::ClientCompaniesController < User::UserController
   def index
     @client_companies = ClientCompany.all
   end
+  
   def show
   end
   

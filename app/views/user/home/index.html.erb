@@ -1,8 +1,9 @@
 <% if current_user.client_company_id%>
-<p><%= link_to 'Dados da empresa', user_client_company_path(current_user.client_company.token) %></p>
-<p><%= link_to 'Dados de Boleto', user_client_company_boleto_accounts_path(current_user.client_company_id) %></p>
-<p><%= link_to 'Dados de Cartão', user_client_company_card_accounts_path(current_user.client_company_id) %></p>
-<p><%= link_to 'Dados de Pix', user_client_company_pix_accounts_path(current_user.client_company_id) %></p>
+<p><%= link_to 'Dados da empresa', user_client_company_path(current_user.client_company) %></p>
+<p><%= link_to 'Dados de Boleto', user_client_company_boleto_accounts_path(current_user.client_company.token) %></p>
+<p><%= link_to 'Dados de Cartão', user_client_company_card_accounts_path(current_user.client_company.token) %></p>
+<p><%= link_to 'Dados de Pix', user_client_company_pix_accounts_path(current_user.client_company.token) %></p>
+<p><%= link_to 'Produtos', user_client_company_client_products_path(current_user.client_company.token) %></p>
 <% else %>
 <%= link_to 'Cadastrar dados da empresa', new_user_client_company_path(@client_company) %>
 <% end %>
