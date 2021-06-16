@@ -1,0 +1,12 @@
+---
+pt-BR:
+  user:
+    client_externals:
+  activerecord:
+    models:
+      client_external:
+        one: 'Cliente externo'
+        other: 'Cliente externos'
+    attributes:
+      client_external:
+        name: 'Nome'

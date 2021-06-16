@@ -14,6 +14,6 @@ class Api::V1::ClientExternalsController < Api::V1::ApiController
   private
 
   def external_params
-    params.require(:client_external).permit(:name, :cpf)
+    params.require(:client_external).permit(:name, :cpf, :client_company_token)
   end
 end
