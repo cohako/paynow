@@ -13,14 +13,13 @@ describe 'Validations' do
   end
 
   it 'must be uniq' do
-    ClientCompany.create!(cnpj: '123412341234', 
+    client_company = ClientCompany.create!(cnpj: '123412341234', 
                         name: 'empresa', 
                         billing_address: 'endereço', 
                         billing_email: 'email@email.com', 
-                        token: '123abc',
                         domain: 'teste.com')
     client_company = ClientCompany.new(cnpj: '123412341234', 
-                                      token: '123abc')
+                                      token: client_company.token)
 
     client_company.valid?
 

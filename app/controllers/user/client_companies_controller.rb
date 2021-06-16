@@ -44,9 +44,15 @@ class User::ClientCompaniesController < User::UserController
   end
 
   def regenerate_token
-    @client_company.regenerate_token
-    @client_company.save
-    redirect_to user_client_company_path(@client_company)
+    token =  SecureRandom.base58(20)
+    colision = ClientProduct.where(product_token: token)
+    if colision.empty?
+      @client_company.token = token
+      @client_company.save
+      redirect_to user_client_company_path(@client_company)
+    else
+      self.generate_token
+    end
   end
 
   private

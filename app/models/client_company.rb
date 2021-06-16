@@ -5,8 +5,8 @@ class ClientCompany < ApplicationRecord
             :billing_email, 
             :domain,
             presence: true 
-
-  has_secure_token length: 20
+  
+  after_create :generate_token
 
   validates :cnpj, :token, uniqueness: true
   
@@ -22,4 +22,15 @@ class ClientCompany < ApplicationRecord
   has_many :payment_methods, through: :pix_accounts
 
   has_many :client_product
+  
+  def generate_token
+      token =  SecureRandom.base58(20)
+      colision = ClientCompany.where(token: token)
+    if colision.empty?
+      self.token = token
+      self.save
+    else
+      self.generate_token
+    end
+  end
 end

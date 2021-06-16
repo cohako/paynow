@@ -23,14 +23,14 @@ describe ClientProduct do
                                             billing_email: 'email@email.com', 
                                             admin: 'teste@teste.com',
                                             domain: 'teste.com')
-      ClientProduct.create!(name: 'Curso de Café', 
+      product = ClientProduct.create!(name: 'Curso de Café', 
                             price: '20.00', 
                             pix_discount: 5, 
                             card_discount: 5, 
                             boleto_discount: 2,
                             client_company_id: client_company.id,
                             product_token: '12345678911234567891')
-      product = ClientProduct.new(product_token: 12345678911234567891)
+      product = ClientProduct.new(product_token: product.product_token)
 
       product.valid?
 
