@@ -1,4 +1,16 @@
 class ClientExternal < ApplicationRecord
   has_many :client_ext_companies
   has_many :client_companies, through: :client_ext_companies
+  after_create :generate_token
+
+  def generate_token
+    token =  SecureRandom.base58(20)
+    colision = ClientCompany.where(token: token)
+    if colision.empty?
+      self.client_external_token = token
+      self.save
+    else
+      self.generate_token
+    end
+  end
 end
