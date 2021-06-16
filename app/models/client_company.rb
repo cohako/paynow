@@ -21,6 +21,9 @@ class ClientCompany < ApplicationRecord
   has_many :pix_accounts
   has_many :payment_methods, through: :pix_accounts
 
+  has_many :client_ext_companies
+  has_many :client_externals, through: :client_ext_companies
+
   has_many :client_product
   
   def generate_token
@@ -33,4 +36,5 @@ class ClientCompany < ApplicationRecord
       self.generate_token
     end
   end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_161000) do
+ActiveRecord::Schema.define(version: 2021_06_16_003044) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -56,6 +56,23 @@ ActiveRecord::Schema.define(version: 2021_06_14_161000) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "admin"
     t.string "domain"
+  end
+
+  create_table "client_ext_companies", force: :cascade do |t|
+    t.integer "client_company_id", null: false
+    t.integer "client_external_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_company_id"], name: "index_client_ext_companies_on_client_company_id"
+    t.index ["client_external_id"], name: "index_client_ext_companies_on_client_external_id"
+  end
+
+  create_table "client_externals", force: :cascade do |t|
+    t.string "name"
+    t.integer "cpf"
+    t.string "client_external_token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "client_products", force: :cascade do |t|
@@ -110,6 +127,8 @@ ActiveRecord::Schema.define(version: 2021_06_14_161000) do
   add_foreign_key "boleto_accounts", "payment_methods"
   add_foreign_key "card_accounts", "client_companies"
   add_foreign_key "card_accounts", "payment_methods"
+  add_foreign_key "client_ext_companies", "client_companies"
+  add_foreign_key "client_ext_companies", "client_externals"
   add_foreign_key "client_products", "client_companies"
   add_foreign_key "pix_accounts", "client_companies"
   add_foreign_key "pix_accounts", "payment_methods"
