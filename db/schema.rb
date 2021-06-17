@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_202459) do
+ActiveRecord::Schema.define(version: 2021_06_17_020622) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -132,6 +132,14 @@ ActiveRecord::Schema.define(version: 2021_06_16_202459) do
     t.index ["payment_method_id"], name: "index_pix_accounts_on_payment_method_id"
   end
 
+  create_table "price_histories", force: :cascade do |t|
+    t.integer "client_product_id", null: false
+    t.decimal "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_product_id"], name: "index_price_histories_on_client_product_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -159,5 +167,6 @@ ActiveRecord::Schema.define(version: 2021_06_16_202459) do
   add_foreign_key "orders", "client_products"
   add_foreign_key "pix_accounts", "client_companies"
   add_foreign_key "pix_accounts", "payment_methods"
+  add_foreign_key "price_histories", "client_products"
   add_foreign_key "users", "client_companies"
 end

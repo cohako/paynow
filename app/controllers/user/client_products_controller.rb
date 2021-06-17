@@ -1,5 +1,5 @@
 class User::ClientProductsController < User::UserController
-  before_action :set_product, only: %i[show edit update destroy]
+  before_action :set_product, only: %i[show edit update destroy update_history]
   before_action :set_company, only: %i[new create]
 
   def index
@@ -35,6 +35,10 @@ class User::ClientProductsController < User::UserController
       flash[:notice] = t('.fail')
       render :edit
     end
+  end
+
+  def update_history
+
   end
 
   def destroy

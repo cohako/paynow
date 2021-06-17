@@ -36,6 +36,7 @@ describe 'Client edit product' do
     expect(page).to have_content('10,20%')
     expect(page).to have_content('2,00%')
     expect(page).to have_content('4,00%')
+    expect(PriceHistory.last.price).to eq(10.0)
     expect(page).to have_link('Voltar', href: user_client_company_client_products_path(client_company.token))
   end
 
