@@ -1,7 +1,7 @@
 class User::ClientProductsController < User::UserController
   before_action :set_product, only: %i[show edit update destroy update_history]
   before_action :set_company, only: %i[new create]
-
+  before_action :check_company
   def index
     @client_products = ClientProduct.where(client_company_id: current_user.client_company_id)
   end
@@ -37,9 +37,6 @@ class User::ClientProductsController < User::UserController
     end
   end
 
-  def update_history
-
-  end
 
   def destroy
     if @client_product.destroy

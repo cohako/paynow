@@ -1,10 +1,15 @@
 class User::UserController < ActionController::Base
   before_action :authenticate_user!
-  #before_action :company_created?, exclude: %i[new create]
-  
   layout 'user'
-
-  def company_created?
-    redirect_to new_user_client_company_path if current_user.client_company_id.nil?
+  
+  private
+  
+  def company_must_exist
+    redirect_back(fallback_location: user_root_path)
   end
+
+  def check_company
+    company_must_exist unless current_user.client_company_id.present?
+  end
+
 end

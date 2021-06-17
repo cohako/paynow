@@ -8,7 +8,7 @@ class User::PixAccountsController < User::UserController
   before_action :set_pix_method, onlye: %i[new create edit update]
   before_action :set_company, only: %i[new create edit update admin?]
   before_action :set_banks, only: %i[new create edit update]
-
+  before_action :check_company
   def index
     @pix_accounts = PixAccount.where(client_company_id: current_user.client_company_id)
   end

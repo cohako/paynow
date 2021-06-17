@@ -6,6 +6,7 @@ class User::CardAccountsController < User::UserController
   before_action :set_card_method, onlye: %i[new create edit update]
   before_action :set_company, only: %i[index new create edit update admin?]
   before_action :set_banks, only: %i[new create edit update]
+  before_action :check_company
 
   def index
     @card_accounts = CardAccount.where(client_company_id: current_user.client_company_id)
