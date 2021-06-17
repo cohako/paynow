@@ -2,7 +2,7 @@ class User::ClientCompaniesController < User::UserController
   before_action :authenticate_user!
   before_action :set_client_company, only: %i[show edit update regenerate_token]
   before_action :admin?, only: %i[edit update regenerate_token]
-  before_action :check_company, exclude: %i[new create]
+  before_action :check_company, only: %i[show index edit update regenerate_token]
 
   def index
     @client_companies = ClientCompany.all

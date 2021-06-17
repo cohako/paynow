@@ -20,7 +20,6 @@ describe 'Client creates company' do
     expect(page).to have_content(user.id)
     expect(page).to have_content('codeplay.com')
     expect(page).to have_link('Voltar', href: root_path)
-    expect(page).to_not have_content('nil')
 
   end
 
