@@ -1,7 +1,6 @@
 class Api::V1::ApiController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
-
   private
 
   def not_found

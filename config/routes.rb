@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :client_externals, only: %i[create], param: :client_external_token
+      resources :orders, only: %i[create], param: :order_token
     end
   end
 end

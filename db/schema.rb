@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_003044) do
+ActiveRecord::Schema.define(version: 2021_06_16_202459) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -88,6 +88,30 @@ ActiveRecord::Schema.define(version: 2021_06_16_003044) do
     t.index ["client_company_id"], name: "index_client_products_on_client_company_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "client_company_id", null: false
+    t.integer "client_product_id", null: false
+    t.integer "client_external_id", null: false
+    t.decimal "price"
+    t.decimal "price_discounted"
+    t.integer "payment_type"
+    t.integer "card_number"
+    t.string "print_name"
+    t.integer "card_cvv"
+    t.string "boleto_address"
+    t.integer "status", default: 0, null: false
+    t.string "company_token"
+    t.string "product_token"
+    t.string "client_token"
+    t.string "order_token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "payment_id"
+    t.index ["client_company_id"], name: "index_orders_on_client_company_id"
+    t.index ["client_external_id"], name: "index_orders_on_client_external_id"
+    t.index ["client_product_id"], name: "index_orders_on_client_product_id"
+  end
+
   create_table "payment_methods", force: :cascade do |t|
     t.string "name"
     t.integer "payment_type"
@@ -130,6 +154,9 @@ ActiveRecord::Schema.define(version: 2021_06_16_003044) do
   add_foreign_key "client_ext_companies", "client_companies"
   add_foreign_key "client_ext_companies", "client_externals"
   add_foreign_key "client_products", "client_companies"
+  add_foreign_key "orders", "client_companies"
+  add_foreign_key "orders", "client_externals"
+  add_foreign_key "orders", "client_products"
   add_foreign_key "pix_accounts", "client_companies"
   add_foreign_key "pix_accounts", "payment_methods"
   add_foreign_key "users", "client_companies"

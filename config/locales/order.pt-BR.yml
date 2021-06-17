@@ -1,0 +1,19 @@
+---
+pt-BR:
+  user:
+    orders:
+  activerecord:
+    models:
+      order:
+        one: 'Cobrança'
+        other: 'Cobranças'
+    attributes:
+      order:
+        client_company: 'Compania' 
+        client_product: 'Produto'
+        client_external: 'Client externo'
+        client_token: 'Token do client'
+        product_token: 'Token do produto'
+        company_token: 'Token da Compania'
+        payment_type: 'Método de pagamento'
+        price: 'Preço'
