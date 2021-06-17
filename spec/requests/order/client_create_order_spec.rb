@@ -205,5 +205,20 @@ describe 'Order API' do
       expect(response).to have_http_status(422)              
       expect(response.content_type).to include('application/json') 
     end
+
+    it 'and params cannot be missing' do
+      client_external = ClientExternal.create!(name: 'TEste', cpf: 11111111111)
+
+      post '/api/v1/orders', 
+            params: {
+                      order: 
+                      {
+                      }
+                    }
+      expect(response).to have_http_status(406)              
+      expect(response.content_type).to include('application/json')
+      expect(response.body).to include("Parâmetros inválidos")
+      
+    end
   end
 end

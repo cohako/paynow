@@ -86,4 +86,20 @@ describe 'Client external API' do
     expect(response.content_type).to include('application/json')
     expect(response.body).to include("Cpf não possui o tamanho esperado (11 caracteres)")
   end
+
+  it 'params cannot be missing' do
+    client_company = ClientCompany.create!(cnpj: '11111111111111', 
+                        name: 'Empresa teste', 
+                        billing_address: 'Endereço teste',
+                        billing_email: 'email@email.com', 
+                        admin: 'teste@teste.com',
+                        domain: 'teste.com')
+    post '/api/v1/client_externals', params: {client_external: {}
+                                    }
+
+    expect(response).to have_http_status(406)
+    expect(response.content_type).to include('application/json')
+    expect(response.body).to include("Parâmetros inválidos")
+
+  end
 end
