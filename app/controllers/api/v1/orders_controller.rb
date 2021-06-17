@@ -12,7 +12,17 @@ class Api::V1::OrdersController < Api::V1::ApiController
     @order.client_external_id = @client_external.id
     end
     @order.save!
-    render json: @order, status: 201
+    render json: @order.as_json( 
+                                except: [:id, :create_at, 
+                                :client_company_id, 
+                                :client_product_id, 
+                                :client_external_id,
+                                :card_number,
+                                :print_name,
+                                :card_cvv,
+                                :boleto_address,
+                                :updated_at]),
+                                status: 201
   end
 
   private
@@ -30,10 +40,14 @@ class Api::V1::OrdersController < Api::V1::ApiController
   end
 
   def apply_discount(client_product, order)
+    price = client_product.price
     if order.pix?
-      price = client_product.price
       discount = client_product.pix_discount
-      price_discounted = price-((price*discount)/100)
+    elsif order.boleto?
+      discount = client_product.boleto_discount
+    else
+      discount = client_product.card_discount
     end
+    price_discounted = price-((price*discount)/100)
   end
 end

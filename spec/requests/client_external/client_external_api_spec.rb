@@ -86,10 +86,4 @@ describe 'Client external API' do
     expect(response.content_type).to include('application/json')
     expect(response.body).to include("Cpf não possui o tamanho esperado (11 caracteres)")
   end
-
-  private
-
-  def parsed_body
-    JSON.parse(response.body)
-  end
 end
