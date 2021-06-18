@@ -8,6 +8,7 @@ class ClientExternal < ApplicationRecord
 
   validates :cpf, length: {is: 11}
 
+  has_many :orders
 
   def generate_token
     token =  SecureRandom.base58(20)

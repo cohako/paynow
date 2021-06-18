@@ -25,6 +25,8 @@ class ClientCompany < ApplicationRecord
   has_many :client_externals, through: :client_ext_companies
 
   has_many :client_product
+
+  has_many :orders
   
   def generate_token
       token =  SecureRandom.base58(20)

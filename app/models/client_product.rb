@@ -16,6 +16,9 @@ class ClientProduct < ApplicationRecord
   
   validates :product_token, 
             uniqueness: true
+
+  has_many :orders
+            
   def price_update
     if self.saved_change_to_price?
       PriceHistory.create!(client_product_id: self.id, price: self.price)

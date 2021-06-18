@@ -66,10 +66,6 @@ class User::ClientCompaniesController < User::UserController
                   :domain)
   end
 
-  def check_company
-    company_must_exist unless current_user.client_company_id.present?
-  end
-
   def set_client_company
     @client_company = ClientCompany.find_by(params[token: :token])
   end
