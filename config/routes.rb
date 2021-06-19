@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     root to: 'home#index'
+    resources :client_companies, only: %i[index show], param: :token
     resources :payment_methods do
       put :active_method, on: :member
       put :desactive_method, on: :member

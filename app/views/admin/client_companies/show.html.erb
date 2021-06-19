@@ -1,0 +1,8 @@
+<% @client_company.orders.each do |order|%>
+  <%= order.order_token %>
+  <%= order.client_product.name %>
+  <%= number_to_currency order.price %>
+  <%= number_to_currency order.price_discounted %>
+  <%= order.client_external.name %>
+  <%= order.client_external.cpf %>
+<% end %>
