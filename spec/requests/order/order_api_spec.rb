@@ -269,37 +269,6 @@ describe 'Order API' do
     end
 
     it 'should got 404 with wrong param' do
-      client_company = ClientCompany.create!(cnpj: '11111111111111', 
-                          name: 'Empresa teste', 
-                          billing_address: 'Endereço teste',
-                          billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
-                          domain: 'teste.com')
-      product = ClientProduct.create!(name: 'Curso de Café', 
-                          price: '20.00', 
-                          pix_discount: 5, 
-                          card_discount: 5, 
-                          boleto_discount: 2,
-                          client_company_id: client_company.id)
-      payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 
-                          payment_type: :pix, 
-                          payment_fee: '2,4', 
-                          max_monetary_fee: '50,54')
-      pix_account = PixAccount.create!(pix_code: 11111111111111111111, 
-                            client_company_id: client_company.id,
-                            payment_method_id: payment_method.id)
-      client_external = ClientExternal.create!(name: 'Teste', cpf: 11111111111)
-      order = Order.create!(payment_type: :pix,
-                            payment_id: pix_account.id,
-                            client_company_id: client_company.id,
-                            company_token: client_company.token,
-                            client_product_id: product.id,
-                            product_token: product.product_token,
-                            client_external_id: client_external.id,
-                            client_token: client_external.client_external_token,
-                            price: product.price,
-                            price_discounted: 19
-                            )
 
       get "/api/v1/orders/:412341234"
 
@@ -318,13 +287,13 @@ describe 'Order API' do
                           domain: 'teste.com')
 
       product = ClientProduct.create!(name: 'Curso de Café', 
-                          price: '20.00', 
+                          price: 20.00, 
                           pix_discount: 5, 
                           card_discount: 5, 
                           boleto_discount: 10,
                           client_company_id: client_company.id)
       product2 = ClientProduct.create!(name: 'Curso de Ruby', 
-                          price: '25.00', 
+                          price: 25.00, 
                           pix_discount: 20, 
                           card_discount: 5, 
                           boleto_discount: 2,
@@ -373,60 +342,37 @@ describe 'Order API' do
         {
           company_token: client_company.token
         }
-        p parsed_body
+
+
       expect(response).to have_http_status(201)              
       expect(response.content_type).to include('application/json')              
-      expect(parsed_body['price_discounted']).to eq(20.0)
-      expect(parsed_body['price']).to eq(20.0)
-      expect(parsed_body['status']).to eq('pendente')
-      expect(parsed_body['payment_type']).to eq('boleto')
-      expect(parsed_body['company_token']).to eq(client_company.token)
-      expect(parsed_body['client_token']).to eq(client_external.client_external_token)
-      expect(parsed_body['product_token']).to eq(product.product_token)
-      expect(parsed_body['price_discounted']).to eq("18.0")
-      expect(parsed_body['price']).to eq("25.0")
-      expect(parsed_body['status']).to eq('pendente')
-      expect(parsed_body['payment_type']).to eq('pix')
-      expect(parsed_body['company_token']).to eq(client_company.token)
-      expect(parsed_body['client_token']).to eq(client_external.client_external_token)
-      expect(parsed_body['product_token']).to eq(product2.product_token)
+      expect(parsed_body[0]['price_discounted']).to eq("20.0")
+      expect(parsed_body[0]['price']).to eq("20.0")
+      expect(parsed_body[0]['status']).to eq('pendente')
+      expect(parsed_body[0]['payment_type']).to eq('pix')
+      expect(parsed_body[0]['company_token']).to eq(client_company.token)
+      expect(parsed_body[0]['client_token']).to eq(client_external.client_external_token)
+      expect(parsed_body[0]['product_token']).to eq(product2.product_token)
+      expect(parsed_body[1]['price_discounted']).to eq("18.0")
+      expect(parsed_body[1]['price']).to eq("20.0")
+      expect(parsed_body[1]['status']).to eq('pendente')
+      expect(parsed_body[1]['payment_type']).to eq('boleto')
+      expect(parsed_body[1]['company_token']).to eq(client_company.token)
+      expect(parsed_body[1]['client_token']).to eq(client_external.client_external_token)
+      expect(parsed_body[1]['product_token']).to eq(product.product_token)
 
     end
 
-    it 'should got 404 with wrong param' do
-      client_company = ClientCompany.create!(cnpj: '11111111111111', 
-                          name: 'Empresa teste', 
-                          billing_address: 'Endereço teste',
-                          billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
-                          domain: 'teste.com')
-      product = ClientProduct.create!(name: 'Curso de Café', 
-                          price: '20.00', 
-                          pix_discount: 5, 
-                          card_discount: 5, 
-                          boleto_discount: 2,
-                          client_company_id: client_company.id)
-      payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 
-                          payment_type: :pix, 
-                          payment_fee: '2,4', 
-                          max_monetary_fee: '50,54')
-      pix_account = PixAccount.create!(pix_code: 11111111111111111111, 
-                            client_company_id: client_company.id,
-                            payment_method_id: payment_method.id)
-      client_external = ClientExternal.create!(name: 'Teste', cpf: 11111111111)
-      order = Order.create!(payment_type: :pix,
-                            payment_id: pix_account.id,
-                            client_company_id: client_company.id,
-                            company_token: client_company.token,
-                            client_product_id: product.id,
-                            product_token: product.product_token,
-                            client_external_id: client_external.id,
-                            client_token: client_external.client_external_token,
-                            price: product.price,
-                            price_discounted: 19
-                            )
+    it 'should got 404 with params missing' do
 
-      get "/api/v1/orders/:412341234"
+      get "/api/v1/orders/", params:{}
+
+        expect(response).to have_http_status(404)              
+    end
+
+    it 'should got 404 with wrong param' do
+
+      get "/api/v1/orders/", params:{company_token: 'sdfasdfasdf'}
 
         expect(response).to have_http_status(404)              
     end

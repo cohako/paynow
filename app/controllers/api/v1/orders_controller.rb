@@ -1,20 +1,20 @@
 class Api::V1::OrdersController < Api::V1::ApiController
   def index
-    @client_company = ClientCompany.find_by(token: params[:company_token])
+    return head 404 unless @client_company = ClientCompany.find_by(
+                                                          token: params[
+                                                            :company_token])
     @orders = @client_company.orders
-    render json: @orders.as_json( 
-                                except: [:id, 
-                                :create_at, 
-                                :client_company_id, 
-                                :client_product_id, 
-                                :client_external_id,
-                                :card_number,
-                                :print_name,
-                                :card_cvv,
-                                :boleto_address,
-                                :updated_at],
-                              ),
-                                status: 201
+
+    render json: @orders.as_json(except: [:id, 
+                              :client_company_id, 
+                              :client_product_id, 
+                              :client_external_id,
+                              :card_number,
+                              :print_name,
+                              :card_cvv,
+                              :boleto_address,
+                              :updated_at]),
+                              status: 201
   end
   def show
     @order = Order.find_by!(order_token: params[:order_token])
