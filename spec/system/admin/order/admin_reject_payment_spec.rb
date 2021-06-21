@@ -54,8 +54,8 @@ describe 'Admin rejects order payment' do
     click_on 'CodePlay ltda'
     click_on order.order_token
     click_on 'Pagamento rejeitado'
-    fill_in 'Data de pagamento', with: "#{1.days.from_now}"
-    fill_in 'Código de aprovação', with: 418
+    fill_in 'Data de tentativa', with: "#{1.days.from_now}"
+    fill_in 'Código de retorno', with: 11
     click_on 'Cadastrar Pagamento'
 
 
@@ -65,6 +65,6 @@ describe 'Admin rejects order payment' do
     expect(page).to have_content(Receipt.last.receipt_token)
     expect(page).to have_content(Receipt.last.payment_date)
     expect(page).to have_content(order.order_token)
-    expect(Order.first.status).to eq('aprovada')
+    expect(Order.first.status).to eq('pendente')
   end
 end

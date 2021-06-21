@@ -1,5 +1,4 @@
-<p> <%= link_to 'Métodos de pagamento', admin_payment_methods_path%> </p>
-<br>
+
 <% @client_companies.each do |company|%>
   <p><%= link_to company.name, admin_client_company_path(company.token) %></p>
 <% end %>

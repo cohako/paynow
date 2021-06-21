@@ -17,7 +17,7 @@ class Admin::ReceiptsController < Admin::AdminController
       redirect_to admin_order_receipt_path(@order.order_token, @receipt.receipt_token)
     else
       render 'admin/orders/show'
-      #redirect_to admin_order_path(@order.order_token), errors: {@receipt.errors}
+      #redirect_to admin_order_path(@order.order_token)
     end
   end
 

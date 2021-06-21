@@ -38,7 +38,8 @@ order = Order.create!(payment_type: :pix,
     client_external_id: client_external.id,
     client_token: client_external.client_external_token,
     price: product.price,
-    price_discounted: 19
+    price_discounted: 19,
+    due_date: 5.days.from_now
     )
 order.order_token = 'aaaaaaaaaaaaaaaaaaaa'
 order.save!
