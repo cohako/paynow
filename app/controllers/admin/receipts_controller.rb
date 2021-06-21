@@ -16,6 +16,7 @@ class Admin::ReceiptsController < Admin::AdminController
       flash[:notice] = t('.success')
       redirect_to admin_order_receipt_path(@order.order_token, @receipt.receipt_token)
     else
+      @refused = @order.refused_histories.new
       render 'admin/orders/show'
       #redirect_to admin_order_path(@order.order_token)
     end

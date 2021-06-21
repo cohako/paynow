@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :client_external
 
   has_one :receipt
-  has_many :refused_history
+  has_many :refused_histories
 
   after_create :generate_token
   after_create :set_due_date

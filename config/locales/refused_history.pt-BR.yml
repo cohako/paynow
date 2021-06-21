@@ -1,0 +1,24 @@
+---
+pt-BR:
+  admin:
+    receipts:
+    refused_histories:
+      create:
+        success: 'Criado com sucesso'
+        fail: 'Não foi possível criar'
+      update:
+        success: 'Atualizado com sucesso'
+        fail: 'Não foi possível atualizar'
+      destroy:
+        notadmin: 'Somente o usuário administrador pode realizar essa ação'
+        success: 'Apagado com sucesso'
+        fail: 'Não foi possível apagar'
+  activerecord:
+    models:
+      refused_history:
+        one: 'Histórico de rejeite'
+        other: 'Histórico de rejeites'
+    attributes:
+      refused_history:
+        attempt: 'Data de tentativa'
+        returned_code: 'Código de retorno' 

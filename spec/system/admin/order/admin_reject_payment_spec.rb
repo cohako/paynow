@@ -35,18 +35,6 @@ describe 'Admin rejects order payment' do
     price_discounted: 19,
     due_date: 5.days.from_now
     )
-    order1 = Order.create!(payment_type: :pix,
-    payment_id: pix_account.id,
-    client_company_id: client_company.id,
-    company_token: client_company.token,
-    client_product_id: product.id,
-    product_token: product.product_token,
-    client_external_id: client_external1.id,
-    client_token: client_external1.client_external_token,
-    price: product.price,
-    price_discounted: 19,
-    due_date: 5.days.from_now
-    )
     admin = Admin.create!(email: 'teste@teste.com', password: 123456)
 
     login_as admin, scope: :admin
@@ -54,17 +42,12 @@ describe 'Admin rejects order payment' do
     click_on 'CodePlay ltda'
     click_on order.order_token
     click_on 'Pagamento rejeitado'
-    fill_in 'Data de tentativa', with: "#{1.days.from_now}"
-    fill_in 'Código de retorno', with: 11
-    click_on 'Cadastrar Pagamento'
+    fill_in 'Data de tentativa', with: "#{1.day.ago}"
+    select 'no_reason', from: 'Código de retorno'
+    click_on 'Cadastrar Rejeite'
 
-
-
-    expect(page).to have_content('Curso de Café')
-    expect(page).to have_content(418)
-    expect(page).to have_content(Receipt.last.receipt_token)
-    expect(page).to have_content(Receipt.last.payment_date)
-    expect(page).to have_content(order.order_token)
-    expect(Order.first.status).to eq('pendente')
+    expect(page).to have_content(1.day.ago)
+    expect(page).to have_content(11)
+    expect(Order.last.status).to eq('pendente')
   end
 end
