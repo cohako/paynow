@@ -13,7 +13,7 @@ describe 'Client register card account' do
                         password: '123456', 
                         client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Cartão Azul', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
 
@@ -26,7 +26,7 @@ describe 'Client register card account' do
     click_on 'Cadastrar Método de pagamento'
 
     expect(page).to have_content('111111111')
-    expect(page).to have_content('cartão')
+    expect(page).to have_content('cartao')
     expect(page).to have_content('Cartão Azul')
     expect(page).to have_content('2,40%')
     expect(page).to have_content('R$ 50,54')
@@ -43,7 +43,7 @@ describe 'Client register card account' do
                         password: '123456', 
                         client_company_id: client_company.id)
      payment_method = PaymentMethod.create!(name: 'Cartão Azul', 
-                                            payment_type: :cartão, 
+                                            payment_type: :cartao, 
                                             payment_fee: '2.4', 
                                             max_monetary_fee: '50.54')
     

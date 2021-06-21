@@ -10,19 +10,18 @@ class Order < ApplicationRecord
   after_create :set_due_date
 
   enum status: {pendente: 0, aprovada: 5, rejeitada: 10}
-  enum payment_type: {boleto: 0, cartão: 1, pix: 2}
+  enum payment_type: {boleto: 0, cartao: 1, pix: 2}
 
   validates :client_token, 
             :product_token, 
             :company_token,
             :payment_type, 
             :price, :price_discounted,
-            :due_date,
             presence: true
 
   validates :card_cvv, :print_name, 
             :card_number, presence: true, 
-            if: :cartão?
+            if: :cartao?
 
   validates :boleto_address, 
             presence: true, 

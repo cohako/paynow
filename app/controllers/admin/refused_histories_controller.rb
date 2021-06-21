@@ -2,7 +2,7 @@ class Admin::RefusedHistoriesController < Admin::AdminController
   before_action :set_order, only: %i[show create]
   
   def show
-    byebug
+
   end
 
   def create

@@ -12,11 +12,11 @@ describe 'Clients edits card accounts' do
                         password: '123456',
                         client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Cartão Azul', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
     PaymentMethod.create!(name: 'Cartão Verde', 
-                          payment_type: :cartão, 
+                          payment_type: :cartao, 
                           payment_fee: '2.4', 
                           max_monetary_fee: '50.54')
     CardAccount.create!(contract_number: 123654, 
@@ -33,7 +33,7 @@ describe 'Clients edits card accounts' do
     click_on 'Atualizar Método de pagamento'
 
     expect(page).to have_content('111123414')
-    expect(page).to have_content('cartão')
+    expect(page).to have_content('cartao')
     expect(page).to have_content('Cartão Verde')
     expect(page).to have_content('2,40%')
     expect(page).to have_content('R$ 50,54')
@@ -48,7 +48,7 @@ describe 'Clients edits card accounts' do
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Cartão Azul', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
     CardAccount.create!(contract_number: 123654, 

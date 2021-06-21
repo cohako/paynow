@@ -19,12 +19,12 @@ describe 'Client register card account' do
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
 
     payment_method = PaymentMethod.create!(name: 'Cartão Vermelho', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
 
     payment_method2 = PaymentMethod.create!(name: 'Cartão Azul', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.5', 
                                           max_monetary_fee: '50.53')
                     

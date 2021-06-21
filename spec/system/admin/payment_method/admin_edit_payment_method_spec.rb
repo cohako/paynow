@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Admin edits payment method' do
   it 'successfully' do
     
-    admin = Admin.create!(email: 'teste@teste.com', password: 123456)
+    admin = Admin.create!(email: 'admin@paynow.com', password: 123456)
     PaymentMethod.create!(name: 'Boleto Vermelho', 
                           payment_type: :boleto, 
                           payment_fee: '2,4', 
@@ -28,7 +28,7 @@ describe 'Admin edits payment method' do
   end
 
   it 'all fields must be filled' do
-    admin = Admin.create!(email: 'teste@teste.com', password: 123456)
+    admin = Admin.create!(email: 'admin@paynow.com', password: 123456)
     PaymentMethod.create!(name: 'Boleto Vermelho', 
                           payment_type: :boleto, 
                           payment_fee: '2,4', 

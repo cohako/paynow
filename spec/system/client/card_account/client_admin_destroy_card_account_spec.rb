@@ -13,7 +13,7 @@ describe 'Client destroy card account' do
                         roles: :admin, 
                         client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Cartão Vermelho', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
     CardAccount.create!(contract_number: 123123418, 
@@ -43,7 +43,7 @@ describe 'Client destroy card account' do
                         roles: :admin, 
                         client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Cartão Vermelho', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
     card_account = CardAccount.create!(contract_number: 418123123, 
@@ -68,7 +68,7 @@ describe 'Client destroy card account' do
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456',client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Cartão Vermelho', 
-                                          payment_type: :cartão, 
+                                          payment_type: :cartao, 
                                           payment_fee: '2.4', 
                                           max_monetary_fee: '50.54')
     card_account = CardAccount.create!(contract_number: 41234123,  

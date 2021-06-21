@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin unarchive payment method' do
   it 'successfully' do
-    admin = Admin.create!(email: 'teste@teste.com', password: 123456)
+    admin = Admin.create!(email: 'admin@paynow.com', password: 123456)
     payment_method = PaymentMethod.create!(name: 'Boleto Vermelho', 
                           payment_type: :boleto, 
                           payment_fee: '2,4', 

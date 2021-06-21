@@ -68,7 +68,7 @@ class User::CardAccountsController < User::UserController
   end
 
   def set_card_method
-    @payment_card = PaymentMethod.where(payment_type: :cartão)
+    @payment_card = PaymentMethod.where(payment_type: :cartao)
   end
 
   def set_company

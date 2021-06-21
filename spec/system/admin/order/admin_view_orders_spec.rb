@@ -6,7 +6,7 @@ describe "Admin view orders " do
                           name: 'CodePlay ltda', 
                           billing_address: 'Endereço empresa',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                          admin: 'admin@paynow.com',
                           domain: 'teste.com')
     product = ClientProduct.create!(name: 'Curso de Café', 
                         price: '20.00', 
@@ -47,7 +47,7 @@ describe "Admin view orders " do
                           price_discounted: 19,
                           due_date: 5.days.from_now
                           )
-    admin = Admin.create!(email: 'teste@teste.com', password: 123456)
+    admin = Admin.create!(email: 'admin@paynow.com', password: 123456)
 
     login_as admin, scope: :admin
     visit admin_root_path
@@ -67,7 +67,7 @@ describe "Admin view orders " do
                           name: 'CodePlay ltda', 
                           billing_address: 'Endereço empresa',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                          admin: 'admin@paynow.com',
                           domain: 'teste.com')
     product = ClientProduct.create!(name: 'Curso de Café', 
                           price: '20.00', 
@@ -83,7 +83,7 @@ describe "Admin view orders " do
                             client_company_id: client_company.id,
                             payment_method_id: payment_method.id)
     client_external = ClientExternal.create!(name: 'Testildo', cpf: 11111111111)
-    admin = Admin.create!(email: 'teste@teste.com', password: 123456)
+    admin = Admin.create!(email: 'admin@paynow.com', password: 123456)
 
     login_as admin, scope: :admin
     visit admin_root_path

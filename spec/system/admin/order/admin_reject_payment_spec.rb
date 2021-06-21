@@ -6,8 +6,8 @@ describe 'Admin rejects order payment' do
       name: 'CodePlay ltda', 
       billing_address: 'Endereço empresa',
       billing_email: 'email@email.com', 
-      admin: 'teste@teste.com',
-      domain: 'teste.com')
+      admin: 'admin@paynow.com',
+      domain: 'paynow.com')
     product = ClientProduct.create!(name: 'Curso de Café', 
     price: '20.00', 
     pix_discount: 5, 
@@ -35,7 +35,7 @@ describe 'Admin rejects order payment' do
     price_discounted: 19,
     due_date: 5.days.from_now
     )
-    admin = Admin.create!(email: 'teste@teste.com', password: 123456)
+    admin = Admin.create!(email: 'admin@paynow.com', password: 123456)
 
     login_as admin, scope: :admin
     visit admin_root_path

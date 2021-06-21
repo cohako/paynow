@@ -33,7 +33,6 @@ describe 'Order API' do
                         company_token: client_company.token,
                         product_token: product.product_token,
                         client_token: client_external.client_external_token,
-                        due_date: 5.days.from_now
                       }
                     }
                     
@@ -112,7 +111,7 @@ describe 'Order API' do
                           boleto_discount: 2,
                           client_company_id: client_company.id)
       payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 
-                          payment_type: :cartão, 
+                          payment_type: :cartao, 
                           payment_fee: '2,4', 
                           max_monetary_fee: '50,54')
       card_account = CardAccount.create!(contract_number: 1111111111111, 
@@ -124,7 +123,7 @@ describe 'Order API' do
             params: {
                       order: 
                       {
-                        payment_type: :cartão,
+                        payment_type: :cartao,
                         payment_id: card_account.id,
                         company_token: client_company.token,
                         product_token: product.product_token,
@@ -141,7 +140,7 @@ describe 'Order API' do
       expect(parsed_body['price_discounted']).to eq("17.2")
       expect(parsed_body['price']).to eq("20.0")
       expect(parsed_body['status']).to eq('pendente')
-      expect(parsed_body['payment_type']).to eq('cartão')
+      expect(parsed_body['payment_type']).to eq('cartao')
       expect(parsed_body['company_token']).to eq(client_company.token)
       expect(parsed_body['client_token']).to eq(client_external.client_external_token)
       expect(parsed_body['product_token']).to eq(product.product_token)

@@ -19,7 +19,7 @@ describe CardAccount do
                             token: '123abc',
                             domain: 'teste.com')
       payment_method = PaymentMethod.create!(name: 'Boleto Vermelho', 
-                                            payment_type: :cartão, 
+                                            payment_type: :cartao, 
                                             payment_fee: '2,4', 
                                             max_monetary_fee: '50,54')
       CardAccount.create!(contract_number: 41234123,  

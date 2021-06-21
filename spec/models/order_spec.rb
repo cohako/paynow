@@ -12,7 +12,7 @@ describe Order do
       expect(order.errors[:company_token]).to include('não pode ficar em branco')
       expect(order.errors[:product_token]).to include('não pode ficar em branco')
       expect(order.errors[:client_token]).to include('não pode ficar em branco')
-      expect(order.errors[:due_date]).to include('não pode ficar em branco')
+      
     end
 
     it 'boleto cannot be blank' do
@@ -26,11 +26,11 @@ describe Order do
       expect(order.errors[:company_token]).to include('não pode ficar em branco')
       expect(order.errors[:product_token]).to include('não pode ficar em branco')
       expect(order.errors[:client_token]).to include('não pode ficar em branco')
-      expect(order.errors[:due_date]).to include('não pode ficar em branco')
+      
     end
 
     it 'card cannot be blank' do
-      order = Order.new(payment_type: :cartão)
+      order = Order.new(payment_type: :cartao)
 
       order.valid?
 
@@ -42,7 +42,7 @@ describe Order do
       expect(order.errors[:company_token]).to include('não pode ficar em branco')
       expect(order.errors[:product_token]).to include('não pode ficar em branco')
       expect(order.errors[:client_token]).to include('não pode ficar em branco')
-      expect(order.errors[:due_date]).to include('não pode ficar em branco')
+      
     end
 
     it 'token must be uniq' do    

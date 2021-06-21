@@ -45,3 +45,4 @@ order.order_token = 'aaaaaaaaaaaaaaaaaaaa'
 order.save!
 
 Admin.create!(email: 'admin@paynow.com', password: '123456')
+User.create!(email: 'user@codeplay.com', password: '123456')
