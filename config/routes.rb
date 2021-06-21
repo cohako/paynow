@@ -1,6 +1,4 @@
-Rails.application.routes.draw do
-  
-  
+Rails.application.routes.draw do  
   namespace :user do
     root to: 'home#index'
     resources :client_companies, only: %i[show new create edit update], param: :token do
@@ -17,6 +15,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'home#index'
     resources :client_companies, only: %i[index show], param: :token
+    resources :orders, only: %i[show], param: :order_token do
+      resources :receipts, only: %i[new create show], param: :receipt_token
+    end
     resources :payment_methods do
       put :active_method, on: :member
       put :desactive_method, on: :member

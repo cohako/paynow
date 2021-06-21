@@ -3,12 +3,13 @@ require 'rails_helper'
 describe 'Client external API' do
   context 'Post /api/v1/clientexternal' do
     it 'should create a external client' do
-      client_company = ClientCompany.create!(cnpj: '11111111111111', 
+      client_company = ClientCompany.create!(cnpj: '11111111111112', 
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
                           admin: 'teste@teste.com',
                           domain: 'teste.com')
+      
       post '/api/v1/client_externals', params: {
                                         client_external: {
                                         name: 'Testildo da testa testado', 
@@ -31,11 +32,13 @@ describe 'Client external API' do
                           billing_email: 'email@email.com', 
                           admin: 'teste@teste.com',
                           domain: 'teste.com')
+
       ClientExternal.create!(name: 'Testildo da testa testado', cpf: 12345678932)
+
       post '/api/v1/client_externals', params: {
                                         client_external: {
-                                        name: 'Testildo da testa testado', 
-                                        cpf: '12345678932'
+                                          name: 'Testildo da testa testado', 
+                                          cpf: '12345678932'
                                         }, 
                                         client_company_token: client_company.token
                                       }
@@ -45,6 +48,7 @@ describe 'Client external API' do
       expect(parsed_body['name']).to eq('Testildo da testa testado')
       expect(parsed_body['cpf']).to eq(12345678932)
       expect(ClientExternal.last.client_companies).to include(ClientCompany.last)
+      expect(ClientExtCompany.count).to eq(1)
     end
 
     it 'name and cpf must be present' do
@@ -97,9 +101,7 @@ describe 'Client external API' do
     post '/api/v1/client_externals', params: {client_external: {}
                                     }
 
-    expect(response).to have_http_status(406)
-    expect(response.content_type).to include('application/json')
-    expect(response.body).to include("Parâmetros inválidos")
+    expect(response).to have_http_status(404)
 
   end
 end

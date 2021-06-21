@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_020622) do
+ActiveRecord::Schema.define(version: 2021_06_20_002418) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_020622) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "payment_id"
+    t.date "due_date"
     t.index ["client_company_id"], name: "index_orders_on_client_company_id"
     t.index ["client_external_id"], name: "index_orders_on_client_external_id"
     t.index ["client_product_id"], name: "index_orders_on_client_product_id"
@@ -140,6 +141,16 @@ ActiveRecord::Schema.define(version: 2021_06_17_020622) do
     t.index ["client_product_id"], name: "index_price_histories_on_client_product_id"
   end
 
+  create_table "receipts", force: :cascade do |t|
+    t.date "payment_date"
+    t.string "auth_code"
+    t.integer "order_id", null: false
+    t.string "receipt_token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_receipts_on_order_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -168,5 +179,6 @@ ActiveRecord::Schema.define(version: 2021_06_17_020622) do
   add_foreign_key "pix_accounts", "client_companies"
   add_foreign_key "pix_accounts", "payment_methods"
   add_foreign_key "price_histories", "client_products"
+  add_foreign_key "receipts", "orders"
   add_foreign_key "users", "client_companies"
 end

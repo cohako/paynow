@@ -20,7 +20,7 @@ class ClientProduct < ApplicationRecord
   has_many :orders
             
   def price_update
-    if self.saved_change_to_price?
+    if self.saved_change_to_price? # Model Dirty
       PriceHistory.create!(client_product_id: self.id, price: self.price)
     end
   end

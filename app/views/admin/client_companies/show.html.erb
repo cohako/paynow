@@ -1,11 +1,9 @@
 <% unless @client_company.orders.empty? %>
   <% @client_company.orders.each do |order|%>
-    <%= order.order_token %>
+    <%= link_to order.order_token, admin_order_path(order.order_token) %>
     <%= order.client_product.name %>
-    <%= number_to_currency order.price %>
-    <%= number_to_currency order.price_discounted %>
-    <%= order.client_external.name %>
     <%= order.client_external.cpf %>
+    <%= order.due_date %>
   <% end %>
 <% else %>
   <h1> Nenhum cobrança cadastrada </h1>

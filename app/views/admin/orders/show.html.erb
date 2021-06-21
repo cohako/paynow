@@ -1,0 +1,24 @@
+<%= @order.order_token %>
+<p>
+
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Aprovar pagamento
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+  <p><%= form_with url: admin_order_receipts_path(@order.order_token), model: [:admin, @receipt] do |f| %> </p>
+  <p><%= f.label :payment_date %></p>
+  <p><%= f.date_field :payment_date %></p>
+  <% @receipt.errors.full_messages_for(:payment_date).each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+  <p><%= f.label :auth_code %></p>
+  <p><%= f.text_field :auth_code %></p>
+  <% @receipt.errors.full_messages_for(:auth_code).each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+  <p><%= f.submit "Cadastrar Pagamento" %></p>
+<% end %>
+  </div>
+</div>

@@ -68,7 +68,8 @@ class Api::V1::OrdersController < Api::V1::ApiController
                                   :card_number,
                                   :print_name,
                                   :card_cvv,
-                                  :boleto_address)
+                                  :boleto_address,
+                                  :due_date)
   end
 
   def apply_discount(client_product, order)

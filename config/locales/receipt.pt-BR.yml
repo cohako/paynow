@@ -1,0 +1,23 @@
+---
+pt-BR:
+  admin:
+    receipts:
+      create:
+        success: 'Criado com sucesso'
+        fail: 'Não foi possível criar'
+      update:
+        success: 'Atualizado com sucesso'
+        fail: 'Não foi possível atualizar'
+      destroy:
+        notadmin: 'Somente o usuário administrador pode realizar essa ação'
+        success: 'Apagado com sucesso'
+        fail: 'Não foi possível apagar'
+  activerecord:
+    models:
+      receipt:
+        one: 'Recibo'
+        other: 'Recibos'
+    attributes:
+      receipt:
+        payment_date: 'Data de pagamento' 
+        auth_code: 'Código de aprovação'

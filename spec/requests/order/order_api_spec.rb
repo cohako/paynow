@@ -32,9 +32,11 @@ describe 'Order API' do
                         payment_id: pix_account.id,
                         company_token: client_company.token,
                         product_token: product.product_token,
-                        client_token: client_external.client_external_token
+                        client_token: client_external.client_external_token,
+                        due_date: 5.days.from_now
                       }
                     }
+                    
       expect(response).to have_http_status(201)              
       expect(response.content_type).to include('application/json')              
       expect(parsed_body['price_discounted']).to eq("19.0")
@@ -79,9 +81,11 @@ describe 'Order API' do
                         company_token: client_company.token,
                         product_token: product.product_token,
                         client_token: client_external.client_external_token,
-                        boleto_address: 'Endereço'
+                        boleto_address: 'Endereço',
+                        due_date: 5.days.from_now
                       }
                     }
+
       expect(response).to have_http_status(201)              
       expect(response.content_type).to include('application/json')              
       expect(parsed_body['price_discounted']).to eq("19.6")
@@ -127,9 +131,11 @@ describe 'Order API' do
                         client_token: client_external.client_external_token,
                         card_number: 12312131,
                         print_name: 'Murilo',
-                        card_cvv: 123
+                        card_cvv: 123,
+                        due_date: 5.days.from_now
                       }
                     }
+
       expect(response).to have_http_status(201)              
       expect(response.content_type).to include('application/json')              
       expect(parsed_body['price_discounted']).to eq("17.2")
@@ -252,7 +258,8 @@ describe 'Order API' do
                             client_external_id: client_external.id,
                             client_token: client_external.client_external_token,
                             price: product.price,
-                            price_discounted: 19
+                            price_discounted: 19,
+                            due_date: 5.days.from_now
                             )
 
       get "/api/v1/orders/#{order.order_token}"
@@ -324,7 +331,8 @@ describe 'Order API' do
                             client_external_id: client_external.id,
                             client_token: client_external.client_external_token,
                             price: product.price,
-                            price_discounted: 20
+                            price_discounted: 20,
+                            due_date: 5.days.from_now
                             )
       Order.create!(payment_type: :boleto,
                             payment_id: boleto_account.id,
@@ -335,7 +343,9 @@ describe 'Order API' do
                             client_external_id: client_external.id,
                             client_token: client_external.client_external_token,
                             price: product.price,
-                            price_discounted: 18
+                            price_discounted: 18,
+                            boleto_address: 'Endereço',
+                            due_date: 5.days.from_now
                             )
 
       get "/api/v1/orders/", params: 
