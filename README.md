@@ -70,12 +70,12 @@ CodePlay no nosso contexto.
 * o endpoint para criação e associação de um cliente externo e uma empresa cliente PayNow, espera receber os seguintes parâmetros:
 ```
 {
-	'client_external':
+	"client_external":
 	{
-		'name': 'Nome de teste',
-		'cpf': '11111111111'
+		"name": "Nome de teste",
+		"cpf": "11111111111"
 	},
-	'client_company_token': 'Token de empresa já cadastrado com 20 chars 
+	"client_company_token": 'Token de empresa já cadastrado com 20 chars 
 	(para teste foi populada uma empresa com token aaaaaaaaaaaaaaaaaaaa')
 }
 ```
@@ -85,29 +85,30 @@ CodePlay no nosso contexto.
 Exemplo:
 ```
 {
-	name: "John Doe",
-	cpf: "11111111111",
-	token: "txrzoRCiGngB8Fr6zgKB"
+  "message": "Cliente criado com sucesso"
 }
 ```
 * HTTP Status: 412 - Parâmetros inválidos para criação de cliente (parametros em branco ou não respeitando as validações)
 
-* HTTP Status: 412 - Token Inválido (da empresa)
+* HTTP Status: 412 - Token Inválido
+
+* HTTP Status: 404 - Not Found
+
 
 #### __post '/api/v1/orders'__
 * o endpoint para criação de cobrança:
 
 ```
 {
-	order: 
+	"order": 
 	{
-		payment_type: dado de enum :pix, :boleto ou :cartao,
-		payment_id: ID de método de pagamento,
-		company_token: Token de empresa já cadastrado com 20 chars,
+		"payment_type": "dado" de enum :pix, :boleto ou :cartao,
+		"payment_id": "ID" de método de pagamento,
+		"company_token": "Token" de empresa já cadastrado com 20 chars,
 		(para teste foi populada uma empresa com token aaaaaaaaaaaaaaaaaaaa')
-		product_token: token do produto,
+		"product_token": "token" do produto,
 		(para teste foi populado um produto com token aaaaaaaaaaaaaaaaaaaa')
-		client_token: Token do cliente external
+		"client_token": "Token" do cliente external
 		(para teste foi populado um client com token aaaaaaaaaaaaaaaaaaaa')
 	}
 }
@@ -118,21 +119,92 @@ Exemplo:
 
 Exemplo:
 ```
-{
-price: "20.0,
-price_discounted: "19.0, 
-payment_type: pix,
-status: pendente,
-company_token: TsB7FPmWCusK1u2B7ZsU,
-product_token: 742qpACdhK1nRkEikNpM,
-client_token: 7LdjjWSEFYpr2DevT4CC,
-order_token: UjK8TuMafjaEdFkSpQmL,
-created_at: 202106-22T21:48:43.637Z,
-payment_id: 1,
-due_date: 2021-06-27
-}
+  {
+    "price": "27.0",
+    "price_discounted": "19.0",
+    "payment_type": "pix",
+    "status": "pendente",
+    "company_token": "aaaaaaaaaaaaaaaaaaaa",
+    "product_token": "aaaaaaaaaaaaaaaaaaaa",
+    "client_token": "aaaaaaaaaaaaaaaaaaaa",
+    "order_token": "aaaaaaaaaaaaaaaaaaaa",
+    "created_at": "2021-06-22T22:47:43.604Z",
+    "payment_id": 2,
+    "due_date": "2021-06-27"
+  }
 ```
 * HTTP Status: 412 - Parâmetros inválidos para criação de cliente (parametros em branco ou não respeitando as validações)
 
-* HTTP Status: 412 - Token Inválido (da empresa)
+* HTTP Status: 412 - Token Inválido
 
+* HTTP Status: 404 - Not Found
+
+
+#### __get '/api/v1/orders'__
+* o endpoint para visualização de todas as cobranças:
+
+```
+{
+	"order": {
+					"company_token": "Token" de empresa já cadastrado com 20 chars,
+					(para teste foi populada uma empresa com token aaaaaaaaaaaaaaaaaaaa')
+				}
+}
+
+```
+#### Possíveis Respostas
+* HTTP Status: 201 
+
+Exemplo:
+```
+  {
+    "price": "27.0",
+    "price_discounted": "19.0",
+    "payment_type": "pix",
+    "status": "pendente",
+    "company_token": "aaaaaaaaaaaaaaaaaaaa",
+    "product_token": "aaaaaaaaaaaaaaaaaaaa",
+    "client_token": "aaaaaaaaaaaaaaaaaaaa",
+    "order_token": "aaaaaaaaaaaaaaaaaaaa",
+    "created_at": "2021-06-22T22:47:43.604Z",
+    "payment_id": 2,
+    "due_date": "2021-06-27"
+  }
+```
+* HTTP Status: 412 - Parâmetros inválidos para criação de cliente (parametros em branco ou não respeitando as validações)
+
+* HTTP Status: 412 - Token Inválido
+
+* HTTP Status: 404 - Not Found
+
+#### __get '/api/v1/orders/:order_token'__
+* o endpoint para visualização de cobrança única:
+
+```
+	curl localhost:3000/api/v1/orders/aaaaaaaaaaaaaaaaaaaa
+
+```
+#### Possíveis Respostas
+* HTTP Status: 201 
+
+Exemplo:
+```
+  {
+  "price": "27.0",
+  "price_discounted": "19.0",
+  "payment_type": "pix",
+  "status": "pendente",
+  "company_token": "aaaaaaaaaaaaaaaaaaaa",
+  "product_token": "aaaaaaaaaaaaaaaaaaaa",
+  "client_token": "aaaaaaaaaaaaaaaaaaaa",
+  "order_token": "aaaaaaaaaaaaaaaaaaaa",
+  "created_at": "2021-06-22T22:47:43.604Z",
+  "payment_id": 2,
+  "due_date": "2021-06-27"
+  }
+```
+* HTTP Status: 412 - Parâmetros inválidos para criação de cliente (parametros em branco ou não respeitando as validações)
+
+* HTTP Status: 412 - Token Inválido
+
+* HTTP Status: 404 - Not Found
