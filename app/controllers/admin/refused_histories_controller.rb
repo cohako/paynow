@@ -9,7 +9,7 @@ class Admin::RefusedHistoriesController < Admin::AdminController
     @refused = @order.refused_histories.new(refused_params)
     if @refused.save
       flash[:notice] = t('.success')
-      redirect_to admin_order_refused_history_path(@order.order_token, @refused.id)
+      redirect_to admin_order_path(@order.order_token)
     else
       @receipt = @order.build_receipt
       render 'admin/orders/show'

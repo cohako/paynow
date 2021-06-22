@@ -1,5 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe RefusedHistory, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe RefusedHistory do
+  context 'Validations' do
+    it 'can not be blank' do
+      refusedhistory = RefusedHistory.new
+
+      refusedhistory.valid?
+
+      expect(refusedhistory.errors[:attempt]).to include('não pode ficar em branco')
+    end
+  end
 end

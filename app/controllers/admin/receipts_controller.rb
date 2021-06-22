@@ -5,20 +5,15 @@ class Admin::ReceiptsController < Admin::AdminController
     @receipt = @order.receipt
   end
 
-  def new
-    @order = Order.find_by(order_token: params[:order_token])
-    @receipt = @order.build_receipt
-  end
   def create
     @receipt = @order.build_receipt(receipts_params)
     if @receipt.save
       @order.aprovada!
       flash[:notice] = t('.success')
-      redirect_to admin_order_receipt_path(@order.order_token, @receipt.receipt_token)
+      redirect_to admin_order_path(@order.order_token)
     else
       @refused = @order.refused_histories.new
       render 'admin/orders/show'
-      #redirect_to admin_order_path(@order.order_token)
     end
   end
 

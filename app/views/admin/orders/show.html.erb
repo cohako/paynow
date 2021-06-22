@@ -1,14 +1,15 @@
 <%= @order.order_token %>
+<%= @order.client_product.name %>
 
 <% if @order.pendente? %>
   <p>
     <button class="btn btn-primary" type="button" 
-    data-bs-toggle="collapse" data-bs-target="#collapseExample" 
+    data-bs-toggle="collapse" data-bs-target="#aprovarpagamento" 
     aria-expanded="false" aria-controls="collapseExample">
       Aprovar pagamento
     </button>
   </p>
-  <div class="collapse" id="collapseExample">
+  <div class="collapse" id="aprovarpagamento">
     <div class="card card-body">
     <p><%= form_with url: admin_order_receipts_path(@order.order_token), model: [:admin, @receipt] do |f| %> </p>
     <p><%= f.label :payment_date %></p>
@@ -38,6 +39,9 @@
     <p><%= form_with url: admin_order_refused_histories_path(@order.order_token), model: [:admin, @refused] do |f| %> </p>
       <p><%= f.label :attempt %></p>
       <p><%= f.text_field :attempt %></p>
+            <% @refused.errors.full_messages_for(:attempt).each do |message| %>
+        <p><%= message %></p>
+      <% end %>
       <p><%= f.label :returned_code %></p>
       <p><%= f.select :returned_code, RefusedHistory.returned_codes.keys %></p>
       <p><%= f.submit "Cadastrar Rejeite" %></p>
@@ -50,5 +54,14 @@
   <p> <%= @order.receipt.payment_date %> </p>
   <p> <h4>Código de autorização:</h4> </p>
   <p> <%= @order.receipt.auth_code %> </p>
+  <p><h4> Token do recibo: </h4></p>
+  <p><%= @order.receipt.receipt_token %></p>
 <% end %>
+
+  <% @order.refused_histories.each do |refused| %>
+  <p><h6>Data de tentativa:</h6> </p>
+    <%= refused.attempt %>
+  <h6>Retorno:</h6>
+    <%= refused.returned_code %>
+  <% end %>
 

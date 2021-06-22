@@ -1,7 +1,6 @@
 ---
 pt-BR:
   admin:
-    receipts:
     refused_histories:
       create:
         success: 'Criado com sucesso'
