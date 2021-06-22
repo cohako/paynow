@@ -23,9 +23,11 @@ CodePlay no nosso contexto.
 ### Configurações
 * Ruby 3.0.1
 * Rails 6.1.3.2
+## Gems
 * Testes:
   - Rspec
   - Capybara
+* Bootstrap
 
 ### Iniciando o projeto em sua máquina 
 * Primeiro clone o projeto:
@@ -63,6 +65,9 @@ CodePlay no nosso contexto.
 
 - Alguns administradores já cadastrados são:
   - email: user@codeplay.com senha: 123456
+  - email: user1@codeplay.com senha: 123456
+  - email: user@coldplay.com senha: 123456
+  - email: user1@coldplay.com senha: 123456
 
 ## API
 ### Registro de cliente final
@@ -145,10 +150,11 @@ Exemplo:
 
 ```
 {
-	"order": {
-					"company_token": "Token" de empresa já cadastrado com 20 chars,
-					(para teste foi populada uma empresa com token aaaaaaaaaaaaaaaaaaaa')
-				}
+	"order": 
+  {
+	  "company_token": "Token" de empresa já cadastrado com 20 chars,
+		(para teste foi populada uma empresa com token aaaaaaaaaaaaaaaaaaaa')
+	}
 }
 
 ```
