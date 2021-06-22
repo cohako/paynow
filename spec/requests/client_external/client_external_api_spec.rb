@@ -20,8 +20,7 @@ describe 'Client external API' do
 
       expect(response).to have_http_status(201)
       expect(response.content_type).to include('application/json')
-      expect(parsed_body['name']).to eq('Testildo da testa testado')
-      expect(parsed_body['cpf']).to eq(12345678932)
+      expect(parsed_body['message']).to eq('Cliente criado com sucesso')
       expect(ClientExternal.last.client_companies).to include(ClientCompany.last)
     end
 
@@ -45,8 +44,7 @@ describe 'Client external API' do
 
       expect(response).to have_http_status(201)
       expect(response.content_type).to include('application/json')
-      expect(parsed_body['name']).to eq('Testildo da testa testado')
-      expect(parsed_body['cpf']).to eq(12345678932)
+      expect(parsed_body['message']).to eq('Cliente criado com sucesso')
       expect(ClientExternal.last.client_companies).to include(ClientCompany.last)
       expect(ClientExtCompany.count).to eq(1)
     end

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     root to: 'home#index'
     resources :client_companies, only: %i[index show], param: :token
     resources :orders, only: %i[show], param: :order_token do
-      resources :refused_histories, only: %i[show create]
+      resources :refused_histories, only: %i[create]
       resources :receipts, only: %i[new create show], param: :receipt_token
     end
     resources :payment_methods do

@@ -1,4 +1,10 @@
 class Api::V1::OrdersController < Api::V1::ApiController
+  
+  before_action :set_product, only: %i[create]
+  before_action :set_client, only: %i[create]
+  before_action :set_company, only: %i[create]
+  before_action :set_order, only: %i[show]
+
   def index
     return head 404 unless @client_company = ClientCompany.find_by(
                                                           token: params[
@@ -16,25 +22,12 @@ class Api::V1::OrdersController < Api::V1::ApiController
                               :updated_at]),
                               status: 201
   end
+
   def show
-    @order = Order.find_by!(order_token: params[:order_token])
-    render json: @order.as_json( 
-                  except: [:id, :create_at, 
-                  :client_company_id, 
-                  :client_product_id, 
-                  :client_external_id,
-                  :card_number,
-                  :print_name,
-                  :card_cvv,
-                  :boleto_address,
-                  :updated_at]),
-                  status: 201
+    render_json(@order)
   end
 
   def create
-    @client_company = ClientCompany.find_by(token: order_params[:company_token])
-    @client_external = ClientExternal.find_by(client_external_token: order_params[:client_token])
-    @client_product = ClientProduct.find_by(product_token: order_params[:product_token])
     @order = Order.new(order_params)
     if @client_company && @client_external && @client_product
     @order.price_discounted = apply_discount(@client_product, @order)
@@ -44,17 +37,7 @@ class Api::V1::OrdersController < Api::V1::ApiController
     @order.client_external_id = @client_external.id
     end
     @order.save!
-    render json: @order.as_json( 
-                                except: [:id, :create_at, 
-                                :client_company_id, 
-                                :client_product_id, 
-                                :client_external_id,
-                                :card_number,
-                                :print_name,
-                                :card_cvv,
-                                :boleto_address,
-                                :updated_at]),
-                                status: 201
+    render_json(@order)
   end
 
   private
@@ -70,6 +53,36 @@ class Api::V1::OrdersController < Api::V1::ApiController
                                   :card_cvv,
                                   :boleto_address,
                                   :due_date)
+  end
+
+  def set_company
+    @client_company = ClientCompany.find_by(token: order_params[:company_token])
+  end
+
+  def set_client
+    @client_external = ClientExternal.find_by(client_external_token: order_params[:client_token])
+  end
+
+  def set_product
+    @client_product = ClientProduct.find_by(product_token: order_params[:product_token])
+  end
+
+  def set_order
+    @order = Order.find_by!(order_token: params[:order_token])
+  end
+
+  def render_json(order)
+    render json: @order.as_json( 
+                                except: [:id, :create_at, 
+                                :client_company_id, 
+                                :client_product_id, 
+                                :client_external_id,
+                                :card_number,
+                                :print_name,
+                                :card_cvv,
+                                :boleto_address,
+                                :updated_at]),
+                                status: 201
   end
 
   def apply_discount(client_product, order)

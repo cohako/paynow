@@ -36,7 +36,6 @@ describe 'Order API' do
                 }
               }
               
-              byebug
       expect(response).to have_http_status(201)              
       expect(response.content_type).to include('application/json')              
       expect(parsed_body['price_discounted']).to eq("19.0")

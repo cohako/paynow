@@ -10,7 +10,7 @@ class Api::V1::ClientExternalsController < Api::V1::ApiController
     else
       @client_external = @client_company.client_externals.create!(external_params)
     end
-    render json: @client_external, status: :created
+    render json: {message: "Cliente criado com sucesso"}, status: :created
   end
 
   private
