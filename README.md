@@ -95,7 +95,7 @@ Exemplo:
 * HTTP Status: 412 - Token Inválido (da empresa)
 
 #### __post '/api/v1/orders'__
-* o endpoint para criação e associação de um cliente externo e uma empresa cliente, espera receber os seguintes parâmetros:
+* o endpoint para criação de cobrança:
 
 ```
 {
@@ -103,10 +103,36 @@ Exemplo:
 	{
 		payment_type: dado de enum :pix, :boleto ou :cartao,
 		payment_id: ID de método de pagamento,
-		company_token: Token de empresa,
+		company_token: Token de empresa já cadastrado com 20 chars,
+		(para teste foi populada uma empresa com token aaaaaaaaaaaaaaaaaaaa')
 		product_token: token do produto,
-		client_token: Token do cliente externl,
+		(para teste foi populado um produto com token aaaaaaaaaaaaaaaaaaaa')
+		client_token: Token do cliente external
+		(para teste foi populado um client com token aaaaaaaaaaaaaaaaaaaa')
 	}
 }
 
 ```
+#### Possíveis Respostas
+* HTTP Status: 201 
+
+Exemplo:
+```
+{
+price: "20.0,
+price_discounted: "19.0, 
+payment_type: pix,
+status: pendente,
+company_token: TsB7FPmWCusK1u2B7ZsU,
+product_token: 742qpACdhK1nRkEikNpM,
+client_token: 7LdjjWSEFYpr2DevT4CC,
+order_token: UjK8TuMafjaEdFkSpQmL,
+created_at: 202106-22T21:48:43.637Z,
+payment_id: 1,
+due_date: 2021-06-27
+}
+```
+* HTTP Status: 412 - Parâmetros inválidos para criação de cliente (parametros em branco ou não respeitando as validações)
+
+* HTTP Status: 412 - Token Inválido (da empresa)
+
