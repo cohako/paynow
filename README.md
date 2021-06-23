@@ -63,7 +63,7 @@ CodePlay no nosso contexto.
 - Alguns administradores já cadastrados são:
   - email: admin@paynow.com senha: 123456
 
-### Usuári
+### Usuário
 * Usuários não podem se registrar com emails de dominio público, como **Google**
   - Para realizar o login basta clicar em ``` Sign In User ```
 
