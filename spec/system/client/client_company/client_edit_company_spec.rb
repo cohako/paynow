@@ -6,7 +6,6 @@ describe 'Client edits company' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', roles: :admin, client_company_id: client_company.id)
     
@@ -24,7 +23,7 @@ describe 'Client edits company' do
     expect(page).to have_content('Empresa de teste')
     expect(page).to have_content('Endereço da empresa')
     expect(page).to have_content('email@codeplay.com')
-    expect(page).to have_content('teste@teste.com')
+    expect(page).to have_content(user.id)
     expect(page).to have_link('Voltar', href: root_path)
 
 
@@ -35,7 +34,7 @@ describe 'Client edits company' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', roles: :admin, client_company_id: client_company.id)
 

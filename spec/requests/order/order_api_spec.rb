@@ -7,7 +7,7 @@ describe 'Order API' do
         name: 'Empresa teste', 
         billing_address: 'Endereço teste',
         billing_email: 'email@email.com', 
-        admin: 'teste@teste.com',
+       
         domain: 'teste.com')
         product = ClientProduct.create!(name: 'Curso de Café', 
           price: '20.00', 
@@ -52,7 +52,7 @@ describe 'Order API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
       product = ClientProduct.create!(name: 'Curso de Café', 
                           price: '20.00', 
@@ -102,7 +102,7 @@ describe 'Order API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
       product = ClientProduct.create!(name: 'Curso de Café', 
                           price: '20.00', 
@@ -155,7 +155,7 @@ describe 'Order API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
       product = ClientProduct.create!(name: 'Curso de Café', 
                           price: '20.00', 
@@ -232,7 +232,7 @@ describe 'Order API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
       product = ClientProduct.create!(name: 'Curso de Café', 
                           price: '20.00', 
@@ -289,7 +289,7 @@ describe 'Order API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
 
       product = ClientProduct.create!(name: 'Curso de Café', 

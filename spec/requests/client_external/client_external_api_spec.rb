@@ -7,7 +7,7 @@ describe 'Client external API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
       
       post '/api/v1/client_externals', params: {
@@ -29,7 +29,7 @@ describe 'Client external API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
 
       ClientExternal.create!(name: 'Testildo da testa testado', cpf: 12345678932)
@@ -54,7 +54,7 @@ describe 'Client external API' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
       post '/api/v1/client_externals', params: {
                                         client_external: {name: '',
@@ -75,7 +75,7 @@ describe 'Client external API' do
                         name: 'Empresa teste', 
                         billing_address: 'Endereço teste',
                         billing_email: 'email@email.com', 
-                        admin: 'teste@teste.com',
+                       
                         domain: 'teste.com')
     post '/api/v1/client_externals', params: {
                                       client_external: {name: 'Teste',
@@ -94,7 +94,7 @@ describe 'Client external API' do
                         name: 'Empresa teste', 
                         billing_address: 'Endereço teste',
                         billing_email: 'email@email.com', 
-                        admin: 'teste@teste.com',
+                       
                         domain: 'teste.com')
     post '/api/v1/client_externals', params: {client_external: {}
                                     }

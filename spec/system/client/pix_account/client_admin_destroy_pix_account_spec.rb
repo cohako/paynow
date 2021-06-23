@@ -6,9 +6,9 @@ describe 'Client destroy pix account' do
                                           name: 'Empresa teste', 
                                           billing_address: 'Endereço teste',
                                           billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com',
+                                         
                                           domain: 'teste.com')
-    user = User.create!(email: 'teste@teste.com', password: '123456', roles: :admin,client_company_id: client_company.id)
+    user = User.create!(email: 'teste@teste.com', password: '123456', roles: :admin, client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 
                                           payment_type: :pix, 
                                           payment_fee: '2.4', 
@@ -34,7 +34,7 @@ describe 'Client destroy pix account' do
                                           name: 'Empresa teste', 
                                           billing_address: 'Endereço teste',
                                           billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com',
+                                         
                                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', roles: :admin,client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 
@@ -59,7 +59,7 @@ describe 'Client destroy pix account' do
                                           name: 'Empresa teste', 
                                           billing_address: 'Endereço teste',
                                           billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com',
+                                         
                                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456',client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 

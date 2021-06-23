@@ -15,8 +15,7 @@ describe CardAccount do
       client_company = ClientCompany.create!(cnpj: '123412341234', 
                             name: 'empresa', 
                             billing_address: 'endereço', 
-                            billing_email: 'email@email.com', 
-                            token: '123abc',
+                            billing_email: 'email@email.com',
                             domain: 'teste.com')
       payment_method = PaymentMethod.create!(name: 'Boleto Vermelho', 
                                             payment_type: :cartao, 

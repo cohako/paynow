@@ -7,7 +7,7 @@ describe 'Client register card account' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', 
                         password: '123456', 
@@ -37,7 +37,7 @@ describe 'Client register card account' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
      user = User.create!(email: 'teste@teste.com', 
                         password: '123456', 

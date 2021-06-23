@@ -6,7 +6,7 @@ describe 'Client regenerate company token' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', roles: :admin, client_company_id: client_company.id)
     login_as user, scope: :user
@@ -22,7 +22,7 @@ describe 'Client regenerate company token' do
                           name: 'Empresa teste', 
                           billing_address: 'Endereço teste',
                           billing_email: 'email@email.com', 
-                          admin: 'teste@teste.com',
+                         
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
 

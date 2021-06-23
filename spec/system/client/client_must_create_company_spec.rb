@@ -6,7 +6,7 @@ describe 'Client must create company' do
       name: 'Empresa teste', 
       billing_address: 'Endereço teste',
       billing_email: 'email@email.com', 
-      admin: 'teste@teste.com',
+     
       domain: 'teste.com')
     user = User.create!(email: 'teste@testa.com', 
                         password: '123456', 

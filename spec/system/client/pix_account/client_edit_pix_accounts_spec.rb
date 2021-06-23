@@ -6,7 +6,7 @@ describe 'Clients edits pix accounts' do
                                           name: 'Empresa teste', 
                                           billing_address: 'Endereço teste',
                                           billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com',
+                                         
                                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 
@@ -38,7 +38,7 @@ describe 'Clients edits pix accounts' do
                                           name: 'Empresa teste', 
                                           billing_address: 'Endereço teste',
                                           billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com',
+                                         
                                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
     payment_method = PaymentMethod.create!(name: 'Pix Vermelho', 

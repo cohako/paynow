@@ -45,12 +45,13 @@ describe Order do
       
     end
 
-    it 'token must be uniq' do    
+    it 'token must be uniq' do
+      User.create!(email: 'user@teste.com', password: '123456')
       client_company = ClientCompany.create!(cnpj: '11111111111111', 
                             name: 'CodePlay ltda', 
                             billing_address: 'Endereço empresa',
                             billing_email: 'email@email.com', 
-                            admin: 'teste@teste.com',
+                            admin: '1',
                             domain: 'teste.com')
       product = ClientProduct.create!(name: 'Curso de Café', 
                           price: '20.00', 

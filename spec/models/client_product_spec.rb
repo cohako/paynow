@@ -20,8 +20,7 @@ describe ClientProduct do
       client_company = ClientCompany.create!(cnpj: '11111111111111', 
                                             name: 'Empresa teste', 
                                             billing_address: 'Endereço teste',
-                                            billing_email: 'email@email.com', 
-                                            admin: 'teste@teste.com',
+                                            billing_email: 'email@email.com',
                                             domain: 'teste.com')
       product = ClientProduct.create!(name: 'Curso de Café', 
                             price: '20.00', 

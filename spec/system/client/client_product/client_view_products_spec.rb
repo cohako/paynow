@@ -6,13 +6,13 @@ describe 'client view all products' do
       name: 'Empresa teste', 
       billing_address: 'Endereço teste',
       billing_email: 'email@email.com', 
-      admin: 'teste@teste.com',
+     
       domain: 'teste.com')
     client_company2 = ClientCompany.create!(cnpj: '11111111111112', 
       name: 'Empresa teste', 
       billing_address: 'Endereço teste',
       billing_email: 'email@email.com', 
-      admin: 'teste@teste.com',
+     
       domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', 
                         password: '123456', 
@@ -63,7 +63,7 @@ describe 'client view all products' do
                                           name: 'Empresa teste', 
                                           billing_address: 'Endereço teste',
                                           billing_email: 'email@email.com', 
-                                          admin: 'teste@teste.com',
+                                         
                                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', 
                         password: '123456', 

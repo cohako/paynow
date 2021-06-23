@@ -6,7 +6,7 @@ describe 'Admin rejects order payment' do
       name: 'CodePlay ltda', 
       billing_address: 'Endereço empresa',
       billing_email: 'email@email.com', 
-      admin: 'admin@paynow.com',
+      
       domain: 'paynow.com')
     product = ClientProduct.create!(name: 'Curso de Café', 
                                     price: '20.00', 
@@ -55,7 +55,7 @@ describe 'Admin rejects order payment' do
       name: 'CodePlay ltda', 
       billing_address: 'Endereço empresa',
       billing_email: 'email@email.com', 
-      admin: 'admin@paynow.com',
+      
       domain: 'paynow.com')
     product = ClientProduct.create!(name: 'Curso de Café', 
                                     price: '20.00', 
