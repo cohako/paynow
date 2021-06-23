@@ -29,6 +29,10 @@ CodePlay no nosso contexto.
   - Capybara
 * Bootstrap
 
+### Banco de dados
+* O desenho do banco de dados pode ser encontrado no link:
+  - https://drive.google.com/drive/folders/1GPoT8bOIzscFayNOh0cuEY9THDchlI2m?usp=sharing
+
 ### Iniciando o projeto em sua máquina 
 * Primeiro clone o projeto:
   ```
