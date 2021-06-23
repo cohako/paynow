@@ -1,9 +1,5 @@
 class Admin::ReceiptsController < Admin::AdminController
   before_action :set_order, only: %i[show create]
-  
-  def show
-    @receipt = @order.receipt
-  end
 
   def create
     @receipt = @order.build_receipt(receipts_params)

@@ -56,8 +56,7 @@ class User::PixAccountsController < User::UserController
   
   def admin?
     @pix_account = PixAccount.find(params[:id])
-    if current_user.admin?
-    else
+    unless current_user.admin?
       flash[:notice] = t('.notadmin')
       redirect_to user_client_company_pix_account_path(@pix_account, @pix_account.client_company_id)
     end

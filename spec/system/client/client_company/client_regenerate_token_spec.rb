@@ -25,6 +25,7 @@ describe 'Client regenerate company token' do
                           admin: 'teste@teste.com',
                           domain: 'teste.com')
     user = User.create!(email: 'teste@teste.com', password: '123456', client_company_id: client_company.id)
+
     login_as user, scope: :user
     visit user_client_company_path(client_company.token)
     click_on 'Trocar token'

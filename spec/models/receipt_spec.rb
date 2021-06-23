@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Receipt do
   context 'validations' do
     it 'cannot be blank' do
+      
       receipt = Receipt.new
 
       receipt.valid?

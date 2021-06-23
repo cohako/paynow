@@ -5,7 +5,6 @@ class User::ClientCompaniesController < User::UserController
   before_action :check_company, only: %i[show index edit update regenerate_token]
 
   def index
-    @client_companies = ClientCompany.all
   end
   
   def show
@@ -24,7 +23,7 @@ class User::ClientCompaniesController < User::UserController
       current_user.admin!
       current_user.client_company_id = @client_company.id
       current_user.save
-      redirect_to user_client_company_path(@client_company)
+      redirect_to user_client_company_path(@client_company.token)
     else
       render :new
     end
@@ -36,7 +35,7 @@ class User::ClientCompaniesController < User::UserController
   def update
     if @client_company.update(clientcompany_params)
       flash[:notice] = t('.success')
-      render :show
+      redirect_to user_client_company_path(@client_company.token)
     else
       flash[:notice] = t('.fail')
       render :edit
@@ -45,11 +44,11 @@ class User::ClientCompaniesController < User::UserController
 
   def regenerate_token
     token =  SecureRandom.base58(20)
-    colision = ClientProduct.where(product_token: token)
+    colision = ClientCompany.where(token: :token)
     if colision.empty?
       @client_company.token = token
       @client_company.save
-      redirect_to user_client_company_path(@client_company)
+      redirect_to user_client_company_path(@client_company.token)
     else
       self.generate_token
     end
@@ -67,15 +66,14 @@ class User::ClientCompaniesController < User::UserController
   end
 
   def set_client_company
-    @client_company = ClientCompany.find_by(params[token: :token])
+    @client_company = ClientCompany.find_by(token: params[:token])
   end
 
   def admin?
-    @client_company = ClientCompany.find_by(params[token: :token])
-    if current_user.admin?
-    else
+    @client_company = ClientCompany.find_by(token: params[:token])
+    unless current_user.admin?
       flash[:notice] = t('.notadmin')
-      redirect_to user_client_company_path(@client_company)
+      redirect_to user_client_company_path(@client_company.token)
     end
   end
 end
