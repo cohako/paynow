@@ -1,4 +1,4 @@
-class Admin::PaymentMethodsController < ApplicationController
+class Admin::PaymentMethodsController < Admin::AdminController
   
   before_action :set_payment_method, only: %i[show edit update desactive_method archive active_method unarchive]
   before_action :authenticate_admin!

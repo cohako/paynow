@@ -352,7 +352,6 @@ describe 'Order API' do
           company_token: client_company.token
         }
 
-
       expect(response).to have_http_status(201)              
       expect(response.content_type).to include('application/json')              
       expect(parsed_body[0]['price_discounted']).to eq("20.0")

@@ -1,8 +1,14 @@
+Admin.create!(email: 'admin@paynow.com', password: '123456')
+User.create!(email: 'user@codeplay.com', roles: :admin, password: '123456')
+User.create!(email: 'user1@codeplay.com', password: '123456')
+User.create!(email: 'user@coldplay.com', roles: :admin,password: '123456')
+User.create!(email: 'user1@coldplay.com', password: '123456')
+
 client_company = ClientCompany.create!(cnpj: '11111111111111', 
                                       name: 'Empresa teste', 
                                       billing_address: 'Endereço teste',
                                       billing_email: 'email@codeplay.com', 
-                                      admin: 'admin@codeplay.com',
+                                      admin: 1,
                                       domain: 'codeplay.com')
 client_company.token = 'aaaaaaaaaaaaaaaaaaaa'
 client_company.save!
@@ -11,15 +17,10 @@ client_company1 = ClientCompany.create!(cnpj: '11111111111112',
                                       name: 'Empresa teste 2', 
                                       billing_address: 'Endereço teste 2',
                                       billing_email: 'email@coldplay.com', 
-                                      admin: 'teste@coldplay.com',
+                                      admin: 3,
                                       domain: 'coldplay.com')
 
-Admin.create!(email: 'admin@paynow.com', password: '123456')
 
-User.create!(email: 'user@codeplay.com', roles: :admin, password: '123456')
-User.create!(email: 'user1@codeplay.com', password: '123456')
-User.create!(email: 'user@coldplay.com', roles: :admin,password: '123456')
-User.create!(email: 'user1@coldplay.com', password: '123456')
 
 product = ClientProduct.create!(name: 'Curso de chá', 
                                 price: '27.00', 
@@ -115,7 +116,8 @@ order = Order.create!(payment_type: :pix,
                       client_token: client_external.client_external_token,
                       price: product.price,
                       price_discounted: 19,
-                      due_date: 5.days.from_now
+                      due_date: 5.days.from_now,
+                      status: :aprovada
                       )
 order.order_token = 'aaaaaaaaaaaaaaaaaaaa'
 order.save!

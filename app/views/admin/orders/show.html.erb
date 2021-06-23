@@ -1,67 +1,90 @@
-<%= @order.order_token %>
-<%= @order.client_product.name %>
+<div align="center">
+<h4>Token da cobrança:</h4>
+<p><%= @order.order_token %></p>
+<h4>Nome do produto comprado:</h4>
+<p><%= @order.client_product.name %></p>
+<h4>Preço: </h4>
+<p><%= number_to_currency @order.price %></p>
+<h4>Preço com desconto: </h4>
+<p><%= number_to_currency @order.price_discounted %></p>
+</div>
 
 <% if @order.pendente? %>
-  <p>
-    <button class="btn btn-primary" type="button" 
-    data-bs-toggle="collapse" data-bs-target="#aprovarpagamento" 
-    aria-expanded="false" aria-controls="collapseExample">
-      Aprovar pagamento
-    </button>
-  </p>
-  <div class="collapse" id="aprovarpagamento">
-    <div class="card card-body">
-    <p><%= form_with url: admin_order_receipts_path(@order.order_token), model: [:admin, @receipt] do |f| %> </p>
-    <p><%= f.label :payment_date %></p>
-    <p><%= f.date_field :payment_date %></p>
-      <% @receipt.errors.full_messages_for(:payment_date).each do |message| %>
-        <p><%= message %></p>
+  <div align="center">
+    <p>
+      <button class="btn btn-primary" type="button" 
+      data-bs-toggle="collapse" data-bs-target="#aprovarpagamento" 
+      aria-expanded="false" aria-controls="collapseExample">
+        Aprovar pagamento
+      </button>
+    </p>
+    <div class="collapse" id="aprovarpagamento">
+      <div class="card card-body">
+      <p><%= form_with url: admin_order_receipts_path(@order.order_token), model: [:admin, @receipt] do |f| %> </p>
+      <p><%= f.label :payment_date %></p>
+      <p><%= f.date_field :payment_date %></p>
+        <% @receipt.errors.full_messages_for(:payment_date).each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      <p><%= f.label :auth_code %></p>
+      <p><%= f.text_field :auth_code %></p>
+        <% @receipt.errors.full_messages_for(:auth_code).each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+        <p><%= f.submit "Cadastrar Pagamento" %></p>
       <% end %>
-    <p><%= f.label :auth_code %></p>
-    <p><%= f.text_field :auth_code %></p>
-      <% @receipt.errors.full_messages_for(:auth_code).each do |message| %>
-        <p><%= message %></p>
-      <% end %>
-      <p><%= f.submit "Cadastrar Pagamento" %></p>
-    <% end %>
+      </div>
     </div>
   </div>
 
-  <p>
-    <button class="btn btn-primary" type="button" 
-    data-bs-toggle="collapse" data-bs-target="#pagamentorejeitado" 
-    aria-expanded="false" aria-controls="pagamentorejeitado">
-      Pagamento rejeitado
-    </button>
-  </p>
-  <div class="collapse" id="pagamentorejeitado">
-    <div class="card card-body">
-    <p><%= form_with url: admin_order_refused_histories_path(@order.order_token), model: [:admin, @refused] do |f| %> </p>
-      <p><%= f.label :attempt %></p>
-      <p><%= f.text_field :attempt %></p>
-            <% @refused.errors.full_messages_for(:attempt).each do |message| %>
-        <p><%= message %></p>
-      <% end %>
-      <p><%= f.label :returned_code %></p>
-      <p><%= f.select :returned_code, RefusedHistory.returned_codes.keys %></p>
-      <p><%= f.submit "Cadastrar Rejeite" %></p>
-    <% end  %>
+  <div align="center">
+    <p>
+      <button class="btn btn-primary" type="button" 
+      data-bs-toggle="collapse" data-bs-target="#pagamentorejeitado" 
+      aria-expanded="false" aria-controls="pagamentorejeitado">
+        Pagamento rejeitado
+      </button>
+    </p>
+    <div class="collapse" id="pagamentorejeitado">
+      <div class="card card-body">
+      <p><%= form_with url: admin_order_refused_histories_path(@order.order_token), model: [:admin, @refused] do |f| %> </p>
+        <p><%= f.label :attempt %></p>
+        <p><%= f.date_field :attempt %></p>
+              <% @refused.errors.full_messages_for(:attempt).each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+        <p><%= f.label :returned_code %></p>
+        <p><%= f.select :returned_code, RefusedHistory.returned_codes.keys %></p>
+        <p><%= f.submit "Cadastrar Rejeite" %></p>
+      <% end  %>
+      </div>
     </div>
   </div>
 
 <% elsif @order.aprovada? %>
-  <p> <h4>Data de pagamento:</h4> </p
-  <p> <%= @order.receipt.payment_date %> </p>
-  <p> <h4>Código de autorização:</h4> </p>
-  <p> <%= @order.receipt.auth_code %> </p>
-  <p><h4> Token do recibo: </h4></p>
-  <p><%= @order.receipt.receipt_token %></p>
+  <div align="center">
+  <h2>Dados de pagamento:</h2>
+    <p> <h4>Data de pagamento:</h4> </p
+    <p> <%= @order.receipt.payment_date %> </p>
+    <p> <h4>Código de autorização:</h4> </p>
+    <p> <%= @order.receipt.auth_code %> </p>
+    <p><h4> Token do recibo: </h4></p>
+    <p><%= @order.receipt.receipt_token %></p>
+  </div>
 <% end %>
 
+      <div align="center"><h5>Data de tentativa:</h5> </div>
   <% @order.refused_histories.each do |refused| %>
-  <p><h6>Data de tentativa:</h6> </p>
-    <%= refused.attempt %>
-  <h6>Retorno:</h6>
-    <%= refused.returned_code %>
+  <% unless refused.attempt.nil?%>
+  <div align="center">
+    <ul class="list-group container">
+      <li class="list-group-item">
+        <p><%= refused.attempt %> </p>
+      <h6>Retorno:</h6>
+        <p><%= refused.returned_code %></p>
+      </li>
+    </ul>
+  </div>
+  <% end %>
   <% end %>
 

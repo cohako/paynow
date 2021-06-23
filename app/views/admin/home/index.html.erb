@@ -1,4 +1,15 @@
-
 <% @client_companies.each do |company|%>
-  <p><%= link_to company.name, admin_client_company_path(company.token) %></p>
+  <div align="center">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <%= link_to company.name, admin_client_company_path(company.token), class:"btn btn-primary" %>
+            <p class="card-text">Token da empresa</p>
+            <p class="card-text"><%= company.token%></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

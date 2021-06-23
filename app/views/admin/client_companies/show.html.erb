@@ -1,9 +1,35 @@
+<div align="center" >
+<h5>Nome da empresa:</h5>
+<p><%= @client_company.name %></p>
+<h5>Endereço:</h5>
+<p><%= @client_company.billing_address %></p>
+<h5>Email de cobrança:</h5>
+<%= @client_company.billing_email %>
+</br>
+</br>
+</br>
+<h3> Cobranças: </h3>
+</div>
+
 <% unless @client_company.orders.empty? %>
-  <% @client_company.orders.each do |order|%>
-    <%= link_to order.order_token, admin_order_path(order.order_token) %>
-    <%= order.client_product.name %>
-    <%= order.client_external.cpf %>
-    <%= order.due_date %>
+  <% @client_company.orders.each do |order|%> </p>
+  <div align="center" class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+        <%= link_to order.order_token, admin_order_path(order.order_token), class:'btn btn-dark'%>
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="true" aria-controls="collapseOne">
+        <p align="center" > Visualizar Detalhes </p>
+        </button>
+    </h2>
+    <div id="collapse" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+            <p> <%= order.client_product.name %></p>
+            <p> <%= order.client_external.cpf %></p>
+            <p> <%= order.due_date %></p>
+      </div>
+    </div>
+  </div>
+</div>
   <% end %>
 <% else %>
   <h1> Nenhum cobrança cadastrada </h1>
