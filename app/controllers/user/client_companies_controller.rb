@@ -20,9 +20,6 @@ class User::ClientCompaniesController < User::UserController
     @client_company.domain = domain[1]
     @client_company.admin = current_user.id
     if @client_company.save
-      current_user.admin!
-      current_user.client_company_id = @client_company.id
-      current_user.save
       redirect_to user_client_company_path(@client_company.token)
     else
       render :new

@@ -7,6 +7,7 @@ class ClientCompany < ApplicationRecord
             presence: true 
   
   after_create :generate_token
+  after_save :set_user_admin
 
   validates :cnpj, :token, uniqueness: true
   
@@ -29,13 +30,22 @@ class ClientCompany < ApplicationRecord
   has_many :orders
   
   def generate_token
-      token =  SecureRandom.base58(20)
-      colision = ClientCompany.where(token: token)
+    token =  SecureRandom.base58(20)
+    colision = ClientCompany.where(token: token)
     if colision.empty?
       self.token = token
       self.save
     else
       self.generate_token
+    end
+  end
+
+  def set_user_admin
+    unless self.admin.nil?
+      user = User.find(self.admin)
+      user.admin!
+      user.client_company_id = self.id
+      user.save
     end
   end
 
