@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   end
   
   root to: "home#index"
+  post :search_receipt, to: "receipts#search_receipt", param: :receipt_token
+  resources :receipts, only: %i[show], param: :receipt_token
 
   devise_for :admins
   devise_for :users

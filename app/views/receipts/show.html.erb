@@ -1,0 +1,5 @@
+<%= @receipt.client_company.name %>
+<%= @receipt.client_company.cnpj %>
+<p><%= @receipt.client_product.name %></p>
+<p><%= @receipt.order.due_date %></p>
+<p><%= number_to_currency @receipt.order.price_discounted %></p>

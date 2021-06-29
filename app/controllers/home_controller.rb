@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   layout :verify_layout
 
+  def index
+    @receipt = Receipt.new
+  end
+
 
   private
 

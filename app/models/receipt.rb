@@ -1,5 +1,7 @@
 class Receipt < ApplicationRecord
   belongs_to :order
+  has_one :client_company, through: :order
+  has_one :client_product, through: :order
 
   after_create :generate_token
 
