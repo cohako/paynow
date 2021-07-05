@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   has_one :receipt
   has_many :refused_histories
 
-  after_create :generate_token
+  before_create :generate_token
   after_create :set_due_date
 
   enum status: {pendente: 0, aprovada: 5, rejeitada: 10}
@@ -31,14 +31,8 @@ class Order < ApplicationRecord
             uniqueness: true
 
   def generate_token
-      token =  SecureRandom.base58(20)
-      colision = ClientProduct.where(product_token: token)
-    if colision.empty?
-      self.order_token = token
-      self.save
-    else
-      self.generate_token
-    end
+    self.order_token =  SecureRandom.base58(20)
+    self.generate_token if Order.find_by(order_token: self.order_token)
   end
 
   def set_due_date

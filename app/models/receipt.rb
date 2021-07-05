@@ -3,7 +3,7 @@ class Receipt < ApplicationRecord
   has_one :client_company, through: :order
   has_one :client_product, through: :order
 
-  after_create :generate_token
+  before_create :generate_token
 
   validates :payment_date,
             :auth_code,
@@ -11,13 +11,7 @@ class Receipt < ApplicationRecord
 
 
   def generate_token
-      token =  SecureRandom.base58(20)
-      colision = ClientProduct.where(product_token: token)
-    if colision.empty?
-      self.receipt_token = token
-      self.save
-    else
-      self.generate_token
-    end
+    self.receipt_token =  SecureRandom.base58(20)
+    self.generate_token if Receipt.find_by(receipt_token: self.receipt_token)
   end
 end
